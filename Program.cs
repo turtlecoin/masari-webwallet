@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -14,6 +14,7 @@
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace WebWallet
 {
@@ -26,6 +27,12 @@ namespace WebWallet
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+        #region Windows Hosting Under IIS
+            //comment this region out if using anything otehr than IIS
+                //.UseKestrel()
+                //.UseIISIntegration()
+                //.UseContentRoot(Directory.GetCurrentDirectory())
+        #endregion
                 .UseStartup<Startup>();
     }
 }

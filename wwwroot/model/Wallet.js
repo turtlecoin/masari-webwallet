@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -212,6 +212,21 @@ define(["require", "exports", "./Transaction", "./KeysRepository", "../lib/numbe
                     var out = _c[_b];
                     if (out.globalIndex === index)
                         return out;
+                }
+            }
+            return null;
+        };
+        Wallet.prototype.getCorrespondingOut = function (index, hash) {
+            //find a corresponding output by Tx hash and "number" (index in Tx)
+            for (var _i = 0, _a = this.transactions; _i < _a.length; _i++) {
+                var tx = _a[_i];
+                if (tx.hash === hash) {
+                    for (var _b = 0, _c = tx.outs; _b < _c.length; _b++) {
+                        var out = _c[_b];
+                        if (out.outputIdx === index) {
+                            return out;
+                        }
+                    }
                 }
             }
             return null;

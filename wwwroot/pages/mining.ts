@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -248,153 +248,12 @@ class MiningView extends DestructableView{
 
 	constructor(container : string){
 		super(container);
-
-		if(!config.testnet) {
-			this.miningAddressesAvailable.push({
-				address: '5qfrSvgYutM1aarmQ1px4aDiY9Da7CLKKDo3UkPuUnQ7bT7tr7i4spuLaiZwXG1dFQbkCinRUNeUNLoNh342sVaqTaWqvt8',
-				label: 'Donation - WebWallet'
-			});
-			this.miningAddressesAvailable.push({
-				address: '5nYWvcvNThsLaMmrsfpRLBRou1RuGtLabUwYH7v6b88bem2J4aUwsoF33FbJuqMDgQjpDRTSpLCZu3dXpqXicE2uSWS4LUP',
-				label: 'Donation - Plenteum'
-			});
-			this.miningAddressesAvailable.push({
-				address: '9ppu34ocgmeZiv4nS2FyQTFLL5wBFQZkhAfph7wGcnFkc8fkCgTJqxnXuBkaw1v2BrUW7iMwKoQy2HXRXzDkRE76Cz7WXkD',
-				label: 'Donation - Plenteum exchange listing'
-			});
-			this.miningAddress = '5qfrSvgYutM1aarmQ1px4aDiY9Da7CLKKDo3UkPuUnQ7bT7tr7i4spuLaiZwXG1dFQbkCinRUNeUNLoNh342sVaqTaWqvt8';
-		}else{
-			this.miningAddressesAvailable.push({
-				address: '6dRJk2wif2c1nGWYEkd1k49D88SEg49E95j9YE4jb8SyAiB6aTwRBqcN2jndBB19zaAr9ZNrWGjKgLa6dJcL7EXFKAWhSFw',
-				label: 'Test wallet'
-			});
-			this.miningAddress = '6dRJk2wif2c1nGWYEkd1k49D88SEg49E95j9YE4jb8SyAiB6aTwRBqcN2jndBB19zaAr9ZNrWGjKgLa6dJcL7EXFKAWhSFw';
-		}
-
-		if(wallet !== null)
-			this.miningAddressesAvailable.push({
-				address:wallet.getPublicAddress(),
-				label:'Your wallet'
-			});
-
-		let self = this;
-		this.intervalRefreshHashrate = setInterval(function(){
-			self.updateHashrate();
-		},1000);
 	}
 
 	destruct(): Promise<void> {
 		clearInterval(this.intervalRefreshHashrate);
 		return super.destruct();
 	}
-
-	start(){
-		let self = this;
-		if(this.pool !== null)
-			this.pool.stop();
-
-		this.updateThreads();
-		this.running = true;
-
-		this.pool = new Pool(
-            config.miningUrl,
-			this.miningAddress + '+' + this.difficulty,
-			'webminer',
-			'cn-lite',
-			1);
-
-		this.pool.onNewJob = function(){
-			for(let worker of self.workersThread)
-				self.sendJobToWorker(worker);
-		};
-
-		this.pool.onClose = function(){
-			self.stop(false);
-			self.pool = null;
-		};
-	}
-
-	stop(stopPool:boolean=true){
-		this.stopWorkers();
-		if(stopPool) {
-			if (this.pool !== null)
-				this.pool.stop();
-			this.pool = null;
-		}
-		this.running = false;
-	}
-
-	updateThreads(){
-		if(this.threads < this.workersThread.length){
-			for(let i = this.threads; i < this.workersThread.length;++i){
-				this.workersThread[i].terminate();
-			}
-			this.workersThread = this.workersThread.slice(0, this.threads);
-		}else if(this.threads > this.workersThread.length){
-			for(let i = 0; i < this.threads-this.workersThread.length;++i) {
-				this.addWorker()
-			}
-		}
-	}
-
-	private sendJobToWorker(worker : Worker){
-		if(this.pool === null)
-			return;
-
-		let jbthrt = {
-			job: this.pool.pendingJob,
-			throttle: Math.max(0, Math.min(this.throttleMiner, 100))
-		};
-		worker.postMessage(jbthrt);
-	}
-	private sendJobToWorkers(){
-		for(let worker of this.workersThread) {
-			this.sendJobToWorker(worker);
-		}
-	}
-
-	private addWorker() {
-		let self = this;
-		let newWorker = new Worker('./lib/mining/worker.js');
-		newWorker.onmessage = function(message : MessageEvent){
-			if(message.data === 'hash') {
-				++self.hashCount;
-			}else if(message.data !== 'hash') {
-				let json = JSON.parse(message.data);
-
-				if(self.pool === null)
-					return;
-
-				self.pool.setJobResponse(json);
-				++self.validShares;
-			}
-			// sendJobToWorker(<Worker>message.target);
-		};
-		this.workersThread.push(newWorker);
-		if(this.pool !== null && this.pool.isLogged){
-			this.sendJobToWorker(newWorker);
-		}
-	}
-
-	private stopWorkers(){
-		for(let worker of this.workersThread) {
-			worker.postMessage(null);
-		}
-	}
-
-	@VueWatched()
-	threadsWatch(){
-		this.updateThreads();
-	}
-
-	lastSharesCount = 0;
-	private updateHashrate(){
-		this.hashRate = (this.hashCount-this.lastSharesCount);
-		this.lastSharesCount = this.hashCount;
-		if(this.hashRate > this.maxHashRate)
-			this.maxHashRate = this.hashRate;
-	}
-
 }
 
 new MiningView('#app');

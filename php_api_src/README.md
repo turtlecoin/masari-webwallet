@@ -1,4 +1,4 @@
-﻿# Plenteum fork of Masari Web Wallet - Fully client-side 
+﻿# TurtleCoin fork of Masari Web Wallet - Fully client-side 
 
 The contents of this folder are the original php based API code from the masari webwallet. 
 

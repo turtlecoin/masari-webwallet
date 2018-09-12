@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -55,38 +55,11 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
                 // check if generated public key matches the current output's key
                 var mine_output = (out.key == generated_tx_pubkey);
                 if (mine_output) {
-                    //let minerTx = false;
-                    //if (amount !== 0) {//miner tx
-                    //	minerTx = true;
-                    //} else {
-                    //	let mask = rawTransaction.rct_signatures.ecdhInfo[output_idx_in_tx].mask;
-                    //	let r = CryptoUtils.decode_ringct(rawTransaction.rct_signatures,
-                    //		tx_pub_key,
-                    //		wallet.keys.priv.view,
-                    //		output_idx_in_tx,
-                    //		mask,
-                    //		amount,
-                    //		derivation);
-                    //	if (r === false)
-                    //		console.error("Cant decode ringCT!");
-                    //	else
-                    //		amount = r;
-                    //}
                     var transactionOut = new Transaction_1.TransactionOut();
-                    //if (typeof rawTransaction.global_index_start !== 'undefined')
-                    //    transactionOut.globalIndex = rawTransaction.global_index_start + output_idx_in_tx;
-                    //else
-                    //    transactionOut.globalIndex = output_idx_in_tx;
                     transactionOut.globalIndex = out.globalIndex;
                     transactionOut.amount = amount;
                     transactionOut.pubKey = out.key;
                     transactionOut.outputIdx = output_idx_in_tx;
-                    //if (!minerTx) {
-                    //	transactionOut.rtcOutPk = rawTransaction.rct_signatures.outPk[output_idx_in_tx];
-                    //	transactionOut.rtcMask = rawTransaction.rct_signatures.ecdhInfo[output_idx_in_tx].mask;
-                    //	transactionOut.rtcAmount = rawTransaction.rct_signatures.ecdhInfo[output_idx_in_tx].amount;
-                    //}
-                    //THIS is super slow and causing issues
                     if (wallet.keys.priv.spend !== null && wallet.keys.priv.spend !== '') {
                         var m_key_image = CryptoUtils_1.CryptoUtils.generate_key_image_helper({
                             view_secret_key: wallet.keys.priv.view,
@@ -126,31 +99,30 @@ define(["require", "exports", "./Transaction", "./CryptoUtils", "./MathUtil", ".
                 }
             }
             else {
-                var txOutIndexes = wallet.getTransactionOutIndexes();
-                for (var iIn = 0; iIn < rawTransaction.vin.length; ++iIn) {
-                    var input = rawTransaction.vin[iIn];
-                    var absoluteOffets = input.key_offsets.slice();
-                    for (var i = 1; i < absoluteOffets.length; ++i) {
-                        absoluteOffets[i] += absoluteOffets[i - 1];
-                    }
-                    var ownTx = -1;
-                    for (var _a = 0, absoluteOffets_1 = absoluteOffets; _a < absoluteOffets_1.length; _a++) {
-                        var index = absoluteOffets_1[_a];
-                        if (txOutIndexes.indexOf(index) !== -1) {
-                            ownTx = index;
-                            break;
-                        }
-                    }
-                    if (ownTx !== -1) {
-                        var txOut = wallet.getOutWithGlobalIndex(ownTx);
-                        if (txOut !== null) {
-                            var transactionIn = new Transaction_1.TransactionIn();
-                            transactionIn.amount = -txOut.amount;
-                            transactionIn.keyImage = txOut.keyImage;
-                            ins.push(transactionIn);
+                //view only, mapping to outs from previous Tx's- fusions - still somoething not quite right here as it should be showing 0
+                //below commented out code should find inputs from the outputs of previous transactions from the same wallet (fusion Tx's) 
+                //following the same pattern as zedwallet and not trying to retreive inputs in a view only wallet.
+                /*
+                for (let iIn = 0; iIn < rawTransaction.vin.length; ++iIn) {
+                    let input = rawTransaction.vin[iIn];
+                    if (input.key_offsets) {
+                        let hash = input.outhash;
+                        let idx = input.outnumber;
+                        if (hash && hash !== "" && idx && idx !== -1) {
+                            //find the corresponding out and insert it... nope, not working
+                            var out = wallet.getCorrespondingOut(idx, hash);
+                            //this should collect outs for fusion Tx's, where the input and the output are for the same address
+                            if (out != null && out.amount == input.amount)
+                            {
+                                let txIn = new TransactionIn();
+                                txIn.amount = out.amount;
+                                txIn.keyImage = out.keyImage;
+                                ins.push(txIn);
+                            }
                         }
                     }
                 }
+                */
             }
             if (outs.length > 0 || ins.length > 0) {
                 transaction = new Transaction_1.Transaction();

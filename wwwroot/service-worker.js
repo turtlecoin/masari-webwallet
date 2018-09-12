@@ -2,7 +2,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -18,11 +18,11 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox
 workbox.precaching.precacheAndRoute([
   {
     "url": "api.html",
-    "revision": "d5aeaf2359dc6cee42135dc6748933f3"
+    "revision": "4910c7ff5a35c07340d736ffc52783f7"
   },
   {
     "url": "api.js",
-    "revision": "52f3c4d3d53d133efde67aabc9bb6ace"
+    "revision": "7922cddbed39f4fdff6940244ef66678"
   },
   {
     "url": "assets/css/font-awesome.css",
@@ -34,7 +34,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/main.css",
-    "revision": "81d95f847d893764323c6334a849c40d"
+    "revision": "d8421c58122f5c899a3f49ca4e81be01"
   },
   {
     "url": "assets/img/binary-background.jpg",
@@ -42,55 +42,71 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/img/favicon.ico",
-    "revision": "12458b914baedde9297ba45becb69400"
+    "revision": "5be8403028787cb82568f383d600345b"
   },
   {
     "url": "assets/img/icons/icon-128x128.png",
-    "revision": "e34530a36ef9cf074197b80b1560bb27"
+    "revision": "e811e677a13d26ebef437640e1bb7d30"
   },
   {
     "url": "assets/img/icons/icon-144x144.png",
-    "revision": "0a89c4a38cc10726b614a30227162b5e"
+    "revision": "acc05fbd2d5578b078dded25d19e731d"
   },
   {
     "url": "assets/img/icons/icon-152x152.png",
-    "revision": "5f68b0bff496d8566c349d90f23f3d48"
+    "revision": "a4f5659dda1cfe7aba3fb84104a563c5"
   },
   {
     "url": "assets/img/icons/icon-192x192.png",
-    "revision": "64adddf26f140413e7214a94d78797f9"
+    "revision": "78dfb4755afb8642a9c43147ccb1cd08"
   },
   {
     "url": "assets/img/icons/icon-256x256.png",
-    "revision": "7dd6ad2b73c9938593268a9c53e804b7"
+    "revision": "ae887fc3850ec2b3cdb71d5a97b318be"
   },
   {
     "url": "assets/img/icons/icon-402x402.png",
-    "revision": "0827310a1f622a90348340e64f2f8d5b"
+    "revision": "3f37d9ffeb2d1e492a6b6d6d9e90d5bc"
   },
   {
     "url": "assets/img/landing/75-usersthink-stock-image.jpg",
     "revision": "7a00bbf57aacc5303e846055b6dae1cb"
   },
   {
+    "url": "assets/img/landing/landing.jpg",
+    "revision": "4cb142424f52853c4d95d455b6c07ff1"
+  },
+  {
     "url": "assets/img/logo_white.png",
-    "revision": "2824d8ede1a1df017e3ede454fd7f2a4"
+    "revision": "7bd09464222eb86e59b02d9b46289a61"
   },
   {
     "url": "assets/img/logo.png",
-    "revision": "686c9eccc934e32076127f4671eba942"
+    "revision": "c63a3f6d4ffea25b8cb47caa6225d99b"
+  },
+  {
+    "url": "assets/img/logoQrCode.jpg",
+    "revision": "b6feaeb51d4ecc8106aad5f2432a425f"
   },
   {
     "url": "assets/img/logoQrCode.png",
-    "revision": "998554cd3aa8de3de02cbbcf4962fdfd"
+    "revision": "809ef9b99f138de582ef491d70e58570"
   },
   {
-    "url": "assets/img/Plenteum_Vertical.png",
-    "revision": "cc8bb367eafb7b2d7092a9f5e24e45a0"
+    "url": "assets/img/qrlogo.png",
+    "revision": "db39ba5d33977cf5ba276ee6dfaa4f9b"
+  },
+  {
+    "url": "assets/img/Turtle_Vertical.png",
+    "revision": "834a2875a32d944ce571be84645651d7"
+  },
+  {
+    "url": "assets/img/turtlehex.png",
+    "revision": "dacb87b45092105b8380fbed2e8f4886"
   },
   {
     "url": "config.js",
-    "revision": "b75e4873915676a2a896d76b51ebd36c"
+    "revision": "4a6024c4d79e6da6b57f8f98f60410cb"
   },
   {
     "url": "d/vue-i118n.js",
@@ -98,15 +114,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "filters/Filters.js",
-    "revision": "9d0f56ebc62074772f02322cd9627d41"
+    "revision": "6d7428b88b10d0e3fb8e7e021aaa72fe"
   },
   {
     "url": "index.html",
-    "revision": "849e2a7691a5ebbe81e90b75fb6a1f5b"
+    "revision": "1275fbc5ed36340a2b0dd63d0a79bf20"
   },
   {
     "url": "index.js",
-    "revision": "6166c030db55448100e9d546a2cb2ac0"
+    "revision": "fcbeaa008883829839eaee2d513ffeb2"
   },
   {
     "url": "lib/base58.js",
@@ -118,7 +134,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "lib/cn_utils_native.js",
-    "revision": "6f382226c0962599661c49e5b5952d77"
+    "revision": "5572be83d7239ee2a8c1161fe7140303"
   },
   {
     "url": "lib/cn_utils.js",
@@ -147,18 +163,6 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "lib/kjua-0.1.1.min.js",
     "revision": "f0ea94e8c4cbc705eaaf8b6cede15389"
-  },
-  {
-    "url": "lib/mining/cn.js",
-    "revision": "61bb278f05944f130d36441262aafe65"
-  },
-  {
-    "url": "lib/mining/cn2.js",
-    "revision": "bc3b8fa73d894d3ddffa1d2e7bb0bb0f"
-  },
-  {
-    "url": "lib/mining/worker.js",
-    "revision": "56f04bf3eb8d4d93752dca47f95adbd5"
   },
   {
     "url": "lib/mnemonic.js",
@@ -242,51 +246,51 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "manifest.json",
-    "revision": "70a5824be1067c32ef427806bb602c5b"
+    "revision": "e1e635959e26744df1c7cd7798ced21c"
   },
   {
     "url": "model/AppState.js",
-    "revision": "dfaf9343c1e093a5c5781c61ca6e9c0f"
+    "revision": "ea45b0da3b465f8f1fb3e710c3ce04d4"
   },
   {
     "url": "model/blockchain/BlockchainExplorer.js",
-    "revision": "85fb12af40cfd70bfbec1669baa6f667"
+    "revision": "1e4af976b6d6aa6cf70f10128286a74b"
   },
   {
     "url": "model/blockchain/BlockchainExplorerRpc2.js",
-    "revision": "c67b656544002fbe886d33a1ead6739d"
+    "revision": "ece7c588eacdeff994481586c2a48b9c"
   },
   {
     "url": "model/CnUtilNative.js",
-    "revision": "e74e1aa1e5ef05a56e3d2979419ce013"
+    "revision": "482400b6e1f75d0c56567de509e22ad7"
   },
   {
     "url": "model/CoinUri.js",
-    "revision": "4f5aeddfc4aba3273d3b1724caf58d1a"
+    "revision": "4a78869a0ed9624f9eeeb970e5d71411"
   },
   {
     "url": "model/Constants.js",
-    "revision": "956955484242c2bbbbeb3f0976fb3617"
+    "revision": "e74ab6137435f26ee81f3a9b9d0bd969"
   },
   {
     "url": "model/CryptoUtils.js",
-    "revision": "c2216faaa6e8aaa655092f01ae2e843e"
+    "revision": "2be20a5511446b7b1cb530a735ee0a76"
   },
   {
     "url": "model/KeysRepository.js",
-    "revision": "5eebb7fbdcd6897c32d8fd5a76b4077a"
+    "revision": "d707861003a4e8b07be478e97b860499"
   },
   {
     "url": "model/MathUtil.js",
-    "revision": "36d93451a5df233baa82f1821954b77d"
+    "revision": "c9190c6448b647e98e94b22f1defb045"
   },
   {
     "url": "model/Mnemonic.js",
-    "revision": "2767f050c83a00c54418d29b0e897423"
+    "revision": "f786c0bd45ab4f89a21fefa562205542"
   },
   {
     "url": "model/MnemonicLang.js",
-    "revision": "33f9cc02526dc437fe62dc209b6fbcff"
+    "revision": "b4130e59181668d077b78483112a847e"
   },
   {
     "url": "model/Nfc.js",
@@ -294,43 +298,43 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "model/Password.js",
-    "revision": "a352a16921a661aee4365176bd88cf62"
+    "revision": "75359a651984e955eced1aa3a17c17dd"
   },
   {
     "url": "model/QRReader.js",
-    "revision": "2155bc491b160c8e66b4182f5e1a73b9"
+    "revision": "3d5e3ff96b539b5abb7f0b5ab92c5393"
   },
   {
     "url": "model/Storage.js",
-    "revision": "1eb6e056c3d3d017682201fbf4b02206"
+    "revision": "719c5c31354ddfd4ee1d5c7a7e3b234d"
   },
   {
     "url": "model/Transaction.js",
-    "revision": "e16a477d5b198ce8c4cdb23d602bb13f"
+    "revision": "56e8dde91737ed9330828eaa4cff04b3"
   },
   {
     "url": "model/TransactionsExplorer.js",
-    "revision": "5a71de22f2fdc55925e61dabe6a0eb9a"
+    "revision": "29d32d6f0519baafb31f0fc5c1b19afe"
   },
   {
     "url": "model/Translations.js",
-    "revision": "c4dcdca562968f193fe6b535bad47c89"
+    "revision": "f9c168a63d23b4e18e998b44f04889bd"
   },
   {
     "url": "model/Wallet.js",
-    "revision": "23a0f475520a220b30745f41af95fde1"
+    "revision": "dfe5a064c91e2e8e0b6e6adc4bdf1dd7"
   },
   {
     "url": "model/WalletRepository.js",
-    "revision": "43978437eab84ae8dece82c3cbdda118"
+    "revision": "a6852f81290ada3dd1e55d1cef7eea6a"
   },
   {
     "url": "pages/account.html",
-    "revision": "3b220b35733f2360a4fa4a8b4a8a3d22"
+    "revision": "fe7e2ef0dc10795068bf86580de2a243"
   },
   {
     "url": "pages/account.js",
-    "revision": "b9a2dc56e7737a15e47e62dc675e46bc"
+    "revision": "589b9875efed41f7bcaa68d901fa6022"
   },
   {
     "url": "pages/changeWalletPassword.html",
@@ -338,11 +342,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/changeWalletPassword.js",
-    "revision": "7e446c22055af0a52c7f9364108c9748"
+    "revision": "d663db521e6190c5d99f0018fe6f82db"
   },
   {
     "url": "pages/createWallet.html",
-    "revision": "b02c92037f45a38e36c23549504891f8"
+    "revision": "05d0f9cd2ba0e81180a5af7cc6173354"
   },
   {
     "url": "pages/createWallet.js",
@@ -354,23 +358,23 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/disconnect.js",
-    "revision": "4b124cf17f203ece98b4214bc20e986f"
+    "revision": "e03c1d7e4d2883c7603c7b7ef4cafafc"
   },
   {
     "url": "pages/donate.html",
-    "revision": "73ad1deb2bd30139ac67f03eeb336cc1"
+    "revision": "db6bc1afc2d6414c2ceff25dfb68705a"
   },
   {
     "url": "pages/donate.js",
-    "revision": "6e6efab0657e9be11ab8176b93602d6d"
+    "revision": "516f75990e919901bac57e1efd8c02e6"
   },
   {
     "url": "pages/export.html",
-    "revision": "87c83bb6a127ddf158658bd8d4fb8038"
+    "revision": "d9aebbd4a53af878f4ef2743c1d34181"
   },
   {
     "url": "pages/export.js",
-    "revision": "6a76c420fa082611a33935a8e488ffe9"
+    "revision": "8daab46917c6a9c9dbbdd3e39b09519c"
   },
   {
     "url": "pages/import.html",
@@ -378,7 +382,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/import.js",
-    "revision": "056ec5ee856246d76e8c22719258b9b3"
+    "revision": "d356d24c1a242e78895c2dd386971af8"
   },
   {
     "url": "pages/importFromFile.html",
@@ -386,15 +390,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/importFromFile.js",
-    "revision": "35e57db40c562d3a02922cb719011cab"
+    "revision": "56ddb73d8cd23683a830358b55397c48"
   },
   {
     "url": "pages/importFromKeys.html",
-    "revision": "9eeaa15d98e7871992ca14d5e14dd0b1"
+    "revision": "66ba3b1306fee8b98c735fb5e0277800"
   },
   {
     "url": "pages/importFromKeys.js",
-    "revision": "cc698306c5f525d705635bf0f6ebf51e"
+    "revision": "2d3b0f69a785970f7262b97ed0307389"
   },
   {
     "url": "pages/importFromMnemonic.html",
@@ -402,7 +406,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/importFromMnemonic.js",
-    "revision": "7fc1978f7d4ff9e49b2ab3476e945d89"
+    "revision": "7e198f5740d747ca54650e2460a220f2"
   },
   {
     "url": "pages/importFromQr.html",
@@ -410,31 +414,31 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/importFromQr.js",
-    "revision": "5127964fa34723b566678a0a47293ac6"
+    "revision": "4b668f73571b38007da8e8ac155a3c06"
   },
   {
     "url": "pages/index.html",
-    "revision": "5371958a3cdb141b289048159188bcd9"
+    "revision": "0637b70346d3754a1776be824317c135"
   },
   {
     "url": "pages/index.js",
-    "revision": "fb88f1c946ce3759f3e9a7788d11f092"
+    "revision": "9e797c9a23f36626c5f22b911f49f7a9"
   },
   {
     "url": "pages/mining.html",
-    "revision": "36b62bc413f550c0d85e4087b0dd76b1"
+    "revision": "3a64dff05556dcb7d808ad5e66c24200"
   },
   {
     "url": "pages/mining.js",
-    "revision": "7a018bf5fd2457f236faff3038c1bd15"
+    "revision": "7875c6608da6ddfb24451da810c62693"
   },
   {
     "url": "pages/network.html",
-    "revision": "745e7aa93cd047ef4a37ff142062958e"
+    "revision": "1839dc6567adf425e29c66ba5a5b0d13"
   },
   {
     "url": "pages/network.js",
-    "revision": "53cde221e039f8b745062894c864605a"
+    "revision": "26b98ab9e61089228add61b725e0694d"
   },
   {
     "url": "pages/receive.html",
@@ -442,27 +446,27 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/receive.js",
-    "revision": "adace8043322916bbdb1dbdd7c3bb776"
+    "revision": "eb052817dd69f5faaeb9671bdca8143d"
   },
   {
     "url": "pages/send.html",
-    "revision": "990a8eea5b6635e6be903007075c1a55"
+    "revision": "9354a4203b267a1251e123ec42ff6fcf"
   },
   {
     "url": "pages/send.js",
-    "revision": "54d449e6749f04dd25a86f2c6a8bb081"
+    "revision": "b1e347e100738354b934380d42d93183"
   },
   {
     "url": "pages/settings.html",
-    "revision": "25e554d8d1d854700a70cc10d789bab6"
+    "revision": "029b729cf33d5a9c9cb9b0d8b5a94719"
   },
   {
     "url": "pages/settings.js",
-    "revision": "396280f688b48fc61505a7fbc938ca60"
+    "revision": "5c098c635e648b218af1a4ef020a855d"
   },
   {
     "url": "pages/support.html",
-    "revision": "82b0e6318d19b9f4580f19f9045f5320"
+    "revision": "59281c7d1d7f2f76f2291c0f9995e5c7"
   },
   {
     "url": "pages/support.js",
@@ -470,7 +474,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "pages/termsOfUse.html",
-    "revision": "23e7e746bdc2181caf52bdcc07a8cafc"
+    "revision": "50a4fe5d19282d07fe3a07640f638838"
   },
   {
     "url": "pages/termsOfUse.js",
@@ -478,35 +482,35 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "providers/BlockchainExplorerProvider.js",
-    "revision": "358abfbc46a49e7bd030bb70e0ab36a3"
+    "revision": "d3b2688faa42b1475770bccccc3d746c"
   },
   {
     "url": "service-worker-raw.js",
-    "revision": "b3ac92d25980d6383a00e46d7815a890"
+    "revision": "489b7b56cde20afcc8be4e9d20152cd3"
   },
   {
     "url": "translations/de.json",
-    "revision": "94c2913014fd2573f56a02e47fdedc56"
+    "revision": "37cb688e26c3df43dd738d3b396f186d"
   },
   {
     "url": "translations/en.json",
-    "revision": "4f407442ecbf74c56fbc61acb8fd1381"
+    "revision": "da898e9727e3d5aeef8acae200970d0d"
   },
   {
     "url": "translations/fr.json",
-    "revision": "91a016c99006f17c9fd83f4467700393"
+    "revision": "30ce99e9db0bb2ff7b66b28f5cf10215"
   },
   {
     "url": "translations/hu.json",
-    "revision": "5a0b06f672048c3446c6199ccbe13afc"
+    "revision": "30fff69cdb0858c809881fd3c81af951"
   },
   {
     "url": "translations/sr.json",
-    "revision": "63433dd57583f2eb010a5681fbff2ece"
+    "revision": "23cce5e6d36047944f29e7d0188f07d4"
   },
   {
     "url": "utils/Url.js",
-    "revision": "5cbb9018a9d0d765ba0fb55bbf802049"
+    "revision": "1b1db040059c603a6ce6b1adbf95daf0"
   },
   {
     "url": "workers/TransferProcessing.js",

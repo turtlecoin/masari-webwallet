@@ -22,9 +22,9 @@
 			<div class="body" >
 				<div class="header-title" >{{ $t("accountPage.balanceBlock.title") }}</div>
 				<div class="content" >
-					<span class="walletAmount" >{{ $n(walletAmount / currencyDivider) }}</span> PLE
+					<span class="walletAmount" >{{ $n(walletAmount / currencyDivider) }}</span> TRTL
 					<tempate class="amount unlocked" v-if="unlockedWalletAmount !== walletAmount" >
-						<br/><span class="walletAmount" >{{ $t("accountPage.balanceBlock.unlocked") }}: {{ $n(unlockedWalletAmount / currencyDivider) }}</span> PLE
+						<br/><span class="walletAmount" >{{ $t("accountPage.balanceBlock.unlocked") }}: {{ $n(unlockedWalletAmount / currencyDivider) }}</span> TRTL
 					</tempate>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 
 					<div class="transactions" >
 						<table>
-							<template v-for="transaction of transactions" v-if="transaction.isFullyChecked()">
+							<template v-for="transaction of transactions" v-if="transaction.isFullyChecked() && !transaction.isFusionTx()">
 								<tr class="transaction" :class="(transaction.blockHeight === 0 ? 'pending' : '')">
 									<td class="direction" >
 										<i v-if="transaction.ins.length == 0" class="fa fa-level-down" aria-hidden="true"></i>
@@ -45,7 +45,7 @@
 									</td><!--LEfT-->
 									<td class="timestamp" v-if="transaction.blockHeight > 0">{{$d(new Date(transaction.timestamp*1000), 'long')}}</td>
 									<td class="timestamp" v-else="">{{ $t("accountPage.historyBlock.pendingTxStatus") }}...</td>
-									<td :class="'amount '+(transaction.getAmount() > 0 ? 'more' : 'less')" >{{ transaction.getAmount() / currencyDivider }}</td>
+									<td :class="'amount '+(transaction.getAmount() > 0 ? 'more' : 'less')" >{{ $n(transaction.getAmount() / currencyDivider) }}</td>
 									<td class="moreInfo">
 										<i class="fa fa-search" aria-hidden="true" @click="moreInfoOnTx(transaction)"></i>
 									</td>
@@ -64,7 +64,7 @@
 										</template>
 									</span><br>
 									<div class="actions tc" >
-										<a href="#receive" class="btn">{{ $t("accountPage.historyBlock.getPLEAddress") }}</a>
+										<a href="#receive" class="btn">{{ $t("accountPage.historyBlock.getTRTLAddress") }}</a>
 									</div>
 								</td>
 							</tr>

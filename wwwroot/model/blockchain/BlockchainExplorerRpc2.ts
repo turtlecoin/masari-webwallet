@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -439,19 +439,4 @@ export class BlockchainExplorerRpc2 implements BlockchainExplorer {
             });
         });
     }
-
-    resolveOpenAlias(domain: string): Promise<{ address: string, name: string | null }> {
-        let self = this;
-        return new Promise(function (resolve, reject) {
-            $.ajax({
-                url: self.serverAddress + 'openAlias.php?domain=' + domain,
-                method: 'GET',
-            }).done(function (response: any) {
-                resolve(response);
-            }).fail(function (data: any) {
-                reject(data);
-            });
-        });
-    }
-
 }

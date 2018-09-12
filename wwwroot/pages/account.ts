@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -36,7 +36,7 @@ class AccountView extends DestructableView{
 	@VueVar(0) blockchainHeight !: number;
 	@VueVar(100000000) currencyDivider !: number;
 
-	intervalRefresh : number = 0;
+    intervalRefresh : number = 0;
 
 	constructor(container : string){
 		super(container);

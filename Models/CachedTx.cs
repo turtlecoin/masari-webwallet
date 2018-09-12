@@ -27,8 +27,8 @@ namespace WebWallet.Models
         public string k_image { get; set; } //k_image
         public List<int> key_offsets { get; set; } //key_offsets
         public int mixin { get; set; } //mixin
-        public int number { get; set; } //output.number
-        public string hash { get; set; } //output.hash
+        public int outnumber { get; set; } //output.number
+        public string outhash { get; set; } //output.hash
     }
     public class CachedOutput
     {

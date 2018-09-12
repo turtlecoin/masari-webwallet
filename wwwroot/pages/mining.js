@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -223,135 +223,11 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
             _this.pool = null;
             _this.hashCount = 0;
             _this.intervalRefreshHashrate = 0;
-            _this.lastSharesCount = 0;
-            if (!config.testnet) {
-                _this.miningAddressesAvailable.push({
-                    address: '5qfrSvgYutM1aarmQ1px4aDiY9Da7CLKKDo3UkPuUnQ7bT7tr7i4spuLaiZwXG1dFQbkCinRUNeUNLoNh342sVaqTaWqvt8',
-                    label: 'Donation - WebWallet'
-                });
-                _this.miningAddressesAvailable.push({
-                    address: '5nYWvcvNThsLaMmrsfpRLBRou1RuGtLabUwYH7v6b88bem2J4aUwsoF33FbJuqMDgQjpDRTSpLCZu3dXpqXicE2uSWS4LUP',
-                    label: 'Donation - Plenteum'
-                });
-                _this.miningAddressesAvailable.push({
-                    address: '9ppu34ocgmeZiv4nS2FyQTFLL5wBFQZkhAfph7wGcnFkc8fkCgTJqxnXuBkaw1v2BrUW7iMwKoQy2HXRXzDkRE76Cz7WXkD',
-                    label: 'Donation - Plenteum exchange listing'
-                });
-                _this.miningAddress = '5qfrSvgYutM1aarmQ1px4aDiY9Da7CLKKDo3UkPuUnQ7bT7tr7i4spuLaiZwXG1dFQbkCinRUNeUNLoNh342sVaqTaWqvt8';
-            }
-            else {
-                _this.miningAddressesAvailable.push({
-                    address: '6dRJk2wif2c1nGWYEkd1k49D88SEg49E95j9YE4jb8SyAiB6aTwRBqcN2jndBB19zaAr9ZNrWGjKgLa6dJcL7EXFKAWhSFw',
-                    label: 'Test wallet'
-                });
-                _this.miningAddress = '6dRJk2wif2c1nGWYEkd1k49D88SEg49E95j9YE4jb8SyAiB6aTwRBqcN2jndBB19zaAr9ZNrWGjKgLa6dJcL7EXFKAWhSFw';
-            }
-            if (wallet !== null)
-                _this.miningAddressesAvailable.push({
-                    address: wallet.getPublicAddress(),
-                    label: 'Your wallet'
-                });
-            var self = _this;
-            _this.intervalRefreshHashrate = setInterval(function () {
-                self.updateHashrate();
-            }, 1000);
             return _this;
         }
         MiningView.prototype.destruct = function () {
             clearInterval(this.intervalRefreshHashrate);
             return _super.prototype.destruct.call(this);
-        };
-        MiningView.prototype.start = function () {
-            var self = this;
-            if (this.pool !== null)
-                this.pool.stop();
-            this.updateThreads();
-            this.running = true;
-            this.pool = new Pool(config.miningUrl, this.miningAddress + '+' + this.difficulty, 'webminer', 'cn-lite', 1);
-            this.pool.onNewJob = function () {
-                for (var _i = 0, _a = self.workersThread; _i < _a.length; _i++) {
-                    var worker = _a[_i];
-                    self.sendJobToWorker(worker);
-                }
-            };
-            this.pool.onClose = function () {
-                self.stop(false);
-                self.pool = null;
-            };
-        };
-        MiningView.prototype.stop = function (stopPool) {
-            if (stopPool === void 0) { stopPool = true; }
-            this.stopWorkers();
-            if (stopPool) {
-                if (this.pool !== null)
-                    this.pool.stop();
-                this.pool = null;
-            }
-            this.running = false;
-        };
-        MiningView.prototype.updateThreads = function () {
-            if (this.threads < this.workersThread.length) {
-                for (var i = this.threads; i < this.workersThread.length; ++i) {
-                    this.workersThread[i].terminate();
-                }
-                this.workersThread = this.workersThread.slice(0, this.threads);
-            }
-            else if (this.threads > this.workersThread.length) {
-                for (var i = 0; i < this.threads - this.workersThread.length; ++i) {
-                    this.addWorker();
-                }
-            }
-        };
-        MiningView.prototype.sendJobToWorker = function (worker) {
-            if (this.pool === null)
-                return;
-            var jbthrt = {
-                job: this.pool.pendingJob,
-                throttle: Math.max(0, Math.min(this.throttleMiner, 100))
-            };
-            worker.postMessage(jbthrt);
-        };
-        MiningView.prototype.sendJobToWorkers = function () {
-            for (var _i = 0, _a = this.workersThread; _i < _a.length; _i++) {
-                var worker = _a[_i];
-                this.sendJobToWorker(worker);
-            }
-        };
-        MiningView.prototype.addWorker = function () {
-            var self = this;
-            var newWorker = new Worker('./lib/mining/worker.js');
-            newWorker.onmessage = function (message) {
-                if (message.data === 'hash') {
-                    ++self.hashCount;
-                }
-                else if (message.data !== 'hash') {
-                    var json = JSON.parse(message.data);
-                    if (self.pool === null)
-                        return;
-                    self.pool.setJobResponse(json);
-                    ++self.validShares;
-                }
-                // sendJobToWorker(<Worker>message.target);
-            };
-            this.workersThread.push(newWorker);
-            if (this.pool !== null && this.pool.isLogged) {
-                this.sendJobToWorker(newWorker);
-            }
-        };
-        MiningView.prototype.stopWorkers = function () {
-            for (var _i = 0, _a = this.workersThread; _i < _a.length; _i++) {
-                var worker = _a[_i];
-                worker.postMessage(null);
-            }
-        };
-        MiningView.prototype.threadsWatch = function () {
-            this.updateThreads();
-        };
-        MiningView.prototype.updateHashrate = function () {
-            this.hashRate = (this.hashCount - this.lastSharesCount);
-            this.lastSharesCount = this.hashCount;
-            if (this.hashRate > this.maxHashRate)
-                this.maxHashRate = this.hashRate;
         };
         __decorate([
             VueAnnotate_1.VueVar('')
@@ -380,9 +256,6 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
         __decorate([
             VueAnnotate_1.VueVar([])
         ], MiningView.prototype, "miningAddressesAvailable", void 0);
-        __decorate([
-            VueAnnotate_1.VueWatched()
-        ], MiningView.prototype, "threadsWatch", null);
         return MiningView;
     }(DestructableView_1.DestructableView));
     new MiningView('#app');

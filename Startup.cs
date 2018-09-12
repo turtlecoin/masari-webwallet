@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -23,7 +23,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebWallet.Helpers;
 using Microsoft.AspNetCore.ResponseCompression;
-using WebWallet.Mining;
 
 namespace WebWallet
 {
@@ -45,9 +44,6 @@ namespace WebWallet
                 config.UseMemoryStorage();
                 config.UseConsole();
             });
-
-            //add the websocket service
-            services.AddSocketManager();
 
             //add MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -84,17 +80,9 @@ namespace WebWallet
             {
                 app.UseHsts();
             }
-            //setup web socket for mining
-            app.UseWebSockets();
-            app.MapSocketManager("/mining", serviceProvider.GetService<MiningHandler>());
-
             app.UseResponseCompression();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseFileServer();
-
-            
-
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

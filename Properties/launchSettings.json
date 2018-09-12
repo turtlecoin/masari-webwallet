@@ -4,8 +4,8 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:52276",
-      "sslPort": 44395
+      "applicationUrl": "http://localhost:52354",
+      "sslPort": 44398
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "plenteum-webwallet": {
+    "webwallet": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -214,6 +214,20 @@ export class Wallet extends Observable {
             for (let out of tx.outs) {
                 if (out.globalIndex === index)
                     return out;
+            }
+        }
+        return null;
+    }
+
+    getCorrespondingOut(index: number, hash: string): TransactionOut | null {
+        //find a corresponding output by Tx hash and "number" (index in Tx)
+        for (let tx of this.transactions) {
+            if (tx.hash === hash) {
+                for (let out of tx.outs) {
+                    if (out.outputIdx === index) {
+                        return out;
+                    }
+                }
             }
         }
         return null;

@@ -35,6 +35,6 @@ You will need to create this directory with the write permissions. The app will 
 Precomputed data stored in the cache is built by background process using HangFire that executes every 30 seconds. 
 This process is initialized on app startup and will run in the background.
 If you compile the app in Debug, you can access the Hangfire Dashboard on [your url]/hangfire - do not publish a production release with a debug build, as this is not a secure route and could allow for the background process to be disabled / stopped.
-This process will call the Plenteum daemon and compute blocks into chunks of blocks to reduce network latency.
+This process will call the TurtleCoin daemon and compute blocks into chunks of blocks to reduce network latency.
 See "BlockchainCache.cs" in the Helpers Folder.
 

@@ -11,16 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Mining\Pool\**" />
-    <Content Remove="Mining\Pool\**" />
-    <EmbeddedResource Remove="Mining\Pool\**" />
-    <None Remove="Mining\Pool\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Mining\Redirector.cs" />
-    <Compile Remove="Mining\TcpSession.cs" />
-    <Compile Remove="Mining\WebSocketSession.cs" />
     <Compile Remove="Models\MinerStats.cs" />
   </ItemGroup>
 
@@ -32,7 +22,6 @@
   <ItemGroup>
     <PackageReference Include="Hangfire" Version="1.6.20" />
     <PackageReference Include="Hangfire.Console" Version="1.4.1" />
-    <PackageReference Include="Hangfire.LiteDB" Version="0.1.0" />
     <PackageReference Include="Hangfire.MemoryStorage.Core" Version="1.4.0" />
     <PackageReference Include="LiteDB" Version="4.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -43,11 +32,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\api.html" />
-    <None Include="wwwroot\api.js" />
-    <None Include="wwwroot\api.js.map" />
     <None Include="wwwroot\api.ts" />
-    <None Include="wwwroot\config.js" />
-    <None Include="wwwroot\config.js.map" />
     <None Include="wwwroot\config.ts" />
     <None Include="wwwroot\assets\css\font-awesome.css" />
     <None Include="wwwroot\assets\css\font-awesome.min.css" />
@@ -70,16 +55,10 @@
     <None Include="wwwroot\d\require.d.ts" />
     <None Include="wwwroot\d\sweetalert2.d.ts" />
     <None Include="wwwroot\d\TextDecoder.d.ts" />
-    <None Include="wwwroot\d\vue-i118n.js" />
-    <None Include="wwwroot\d\vue-i118n.js.map" />
     <None Include="wwwroot\d\vue-i118n.ts" />
-    <None Include="wwwroot\d\Vue.js" />
-    <None Include="wwwroot\d\Vue.js.map" />
     <None Include="wwwroot\d\Vue.ts" />
     <None Include="wwwroot\d\workbox.d.ts" />
     <None Include="wwwroot\d\workers.d.ts" />
-    <None Include="wwwroot\filters\Filters.js" />
-    <None Include="wwwroot\filters\Filters.js.map" />
     <None Include="wwwroot\filters\Filters.ts" />
     <None Include="wwwroot\assets\fonts\fontawesome-webfont.eot" />
     <None Include="wwwroot\assets\fonts\fontawesome-webfont.svg" />
@@ -102,8 +81,6 @@
     <None Include="wwwroot\assets\img\logo_white.png" />
     <None Include="wwwroot\assets\img\Masari_Vertical.png" />
     <None Include="wwwroot\index.html" />
-    <None Include="wwwroot\index.js" />
-    <None Include="wwwroot\index.js.map" />
     <None Include="wwwroot\index.ts" />
     <None Include="wwwroot\lib\base58.js" />
     <None Include="wwwroot\lib\biginteger.js" />
@@ -115,9 +92,6 @@
     <None Include="wwwroot\lib\jquery-3.2.1.min.js" />
     <None Include="wwwroot\lib\jspdf.min.js" />
     <None Include="wwwroot\lib\kjua-0.1.1.min.js" />
-    <None Include="wwwroot\lib\mining\cn.js" />
-    <None Include="wwwroot\lib\mining\cn2.js" />
-    <None Include="wwwroot\lib\mining\worker.js" />
     <None Include="wwwroot\lib\mnemonic.js" />
     <None Include="wwwroot\lib\nacl-fast-cn.js" />
     <None Include="wwwroot\lib\nacl-fast.js" />
@@ -125,183 +99,81 @@
     <None Include="wwwroot\lib\nacl-util.min.js" />
     <None Include="wwwroot\lib\nacl.js" />
     <None Include="wwwroot\lib\nacl.min.js" />
-    <None Include="wwwroot\lib\numbersLab\Context.js" />
-    <None Include="wwwroot\lib\numbersLab\Context.js.map" />
     <None Include="wwwroot\lib\numbersLab\Context.ts" />
-    <None Include="wwwroot\lib\numbersLab\DependencyInjector.js" />
-    <None Include="wwwroot\lib\numbersLab\DependencyInjector.js.map" />
     <None Include="wwwroot\lib\numbersLab\DependencyInjector.ts" />
-    <None Include="wwwroot\lib\numbersLab\DestructableView.js" />
-    <None Include="wwwroot\lib\numbersLab\DestructableView.js.map" />
     <None Include="wwwroot\lib\numbersLab\DestructableView.ts" />
-    <None Include="wwwroot\lib\numbersLab\Logger.js" />
-    <None Include="wwwroot\lib\numbersLab\Logger.js.map" />
     <None Include="wwwroot\lib\numbersLab\Logger.ts" />
-    <None Include="wwwroot\lib\numbersLab\Observable.js" />
-    <None Include="wwwroot\lib\numbersLab\Observable.js.map" />
     <None Include="wwwroot\lib\numbersLab\Observable.ts" />
-    <None Include="wwwroot\lib\numbersLab\Router.js" />
-    <None Include="wwwroot\lib\numbersLab\Router.js.map" />
     <None Include="wwwroot\lib\numbersLab\Router.ts" />
-    <None Include="wwwroot\lib\numbersLab\VueAnnotate.js" />
-    <None Include="wwwroot\lib\numbersLab\VueAnnotate.js.map" />
     <None Include="wwwroot\lib\numbersLab\VueAnnotate.ts" />
     <None Include="wwwroot\lib\require.js" />
     <None Include="wwwroot\lib\sha3.js" />
     <None Include="wwwroot\lib\sweetalert2.js" />
     <None Include="wwwroot\lib\vue-i18n.js" />
     <None Include="wwwroot\lib\vue.min.js" />
-    <None Include="wwwroot\model\AppState.js" />
-    <None Include="wwwroot\model\AppState.js.map" />
     <None Include="wwwroot\model\AppState.ts" />
-    <None Include="wwwroot\model\blockchain\BlockchainExplorer.js" />
-    <None Include="wwwroot\model\blockchain\BlockchainExplorer.js.map" />
     <None Include="wwwroot\model\blockchain\BlockchainExplorer.ts" />
-    <None Include="wwwroot\model\blockchain\BlockchainExplorerRpc2.js" />
-    <None Include="wwwroot\model\blockchain\BlockchainExplorerRpc2.js.map" />
     <None Include="wwwroot\model\blockchain\BlockchainExplorerRpc2.ts" />
-    <None Include="wwwroot\model\CnUtilNative.js" />
-    <None Include="wwwroot\model\CnUtilNative.js.map" />
     <None Include="wwwroot\model\CnUtilNative.ts" />
-    <None Include="wwwroot\model\CoinUri.js" />
-    <None Include="wwwroot\model\CoinUri.js.map" />
     <None Include="wwwroot\model\CoinUri.ts" />
-    <None Include="wwwroot\model\Constants.js" />
-    <None Include="wwwroot\model\Constants.js.map" />
     <None Include="wwwroot\model\Constants.ts" />
-    <None Include="wwwroot\model\CryptoUtils.js" />
-    <None Include="wwwroot\model\CryptoUtils.js.map" />
     <None Include="wwwroot\model\CryptoUtils.ts" />
-    <None Include="wwwroot\model\KeysRepository.js" />
-    <None Include="wwwroot\model\KeysRepository.js.map" />
     <None Include="wwwroot\model\KeysRepository.ts" />
-    <None Include="wwwroot\model\MathUtil.js" />
-    <None Include="wwwroot\model\MathUtil.js.map" />
     <None Include="wwwroot\model\MathUtil.ts" />
-    <None Include="wwwroot\model\Mnemonic.js" />
-    <None Include="wwwroot\model\Mnemonic.js.map" />
     <None Include="wwwroot\model\Mnemonic.ts" />
-    <None Include="wwwroot\model\MnemonicLang.js" />
-    <None Include="wwwroot\model\MnemonicLang.js.map" />
     <None Include="wwwroot\model\MnemonicLang.ts" />
-    <None Include="wwwroot\model\Nfc.js" />
-    <None Include="wwwroot\model\Nfc.js.map" />
     <None Include="wwwroot\model\Nfc.ts" />
-    <None Include="wwwroot\model\Password.js" />
-    <None Include="wwwroot\model\Password.js.map" />
     <None Include="wwwroot\model\Password.ts" />
-    <None Include="wwwroot\model\QRReader.js" />
-    <None Include="wwwroot\model\QRReader.js.map" />
     <None Include="wwwroot\model\QRReader.ts" />
-    <None Include="wwwroot\model\Storage.js" />
-    <None Include="wwwroot\model\Storage.js.map" />
     <None Include="wwwroot\model\Storage.ts" />
-    <None Include="wwwroot\model\Transaction.js" />
-    <None Include="wwwroot\model\Transaction.js.map" />
     <None Include="wwwroot\model\Transaction.ts" />
-    <None Include="wwwroot\model\TransactionsExplorer.js" />
-    <None Include="wwwroot\model\TransactionsExplorer.js.map" />
     <None Include="wwwroot\model\TransactionsExplorer.ts" />
-    <None Include="wwwroot\model\Translations.js" />
-    <None Include="wwwroot\model\Translations.js.map" />
     <None Include="wwwroot\model\Translations.ts" />
-    <None Include="wwwroot\model\Wallet.js" />
-    <None Include="wwwroot\model\Wallet.js.map" />
     <None Include="wwwroot\model\Wallet.ts" />
-    <None Include="wwwroot\model\WalletRepository.js" />
-    <None Include="wwwroot\model\WalletRepository.js.map" />
     <None Include="wwwroot\model\WalletRepository.ts" />
     <None Include="wwwroot\pages\account.html" />
-    <None Include="wwwroot\pages\account.js" />
-    <None Include="wwwroot\pages\account.js.map" />
     <None Include="wwwroot\pages\account.ts" />
     <None Include="wwwroot\pages\changeWalletPassword.html" />
-    <None Include="wwwroot\pages\changeWalletPassword.js" />
-    <None Include="wwwroot\pages\changeWalletPassword.js.map" />
     <None Include="wwwroot\pages\changeWalletPassword.ts" />
     <None Include="wwwroot\pages\createWallet.html" />
-    <None Include="wwwroot\pages\createWallet.js" />
-    <None Include="wwwroot\pages\createWallet.js.map" />
     <None Include="wwwroot\pages\createWallet.ts" />
     <None Include="wwwroot\pages\disconnect.html" />
-    <None Include="wwwroot\pages\disconnect.js" />
-    <None Include="wwwroot\pages\disconnect.js.map" />
     <None Include="wwwroot\pages\disconnect.ts" />
     <None Include="wwwroot\pages\donate.html" />
-    <None Include="wwwroot\pages\donate.js" />
-    <None Include="wwwroot\pages\donate.js.map" />
     <None Include="wwwroot\pages\donate.ts" />
     <None Include="wwwroot\pages\export.html" />
-    <None Include="wwwroot\pages\export.js" />
-    <None Include="wwwroot\pages\export.js.map" />
     <None Include="wwwroot\pages\export.ts" />
     <None Include="wwwroot\pages\import.html" />
-    <None Include="wwwroot\pages\import.js" />
-    <None Include="wwwroot\pages\import.js.map" />
     <None Include="wwwroot\pages\import.ts" />
     <None Include="wwwroot\pages\importFromFile.html" />
-    <None Include="wwwroot\pages\importFromFile.js" />
-    <None Include="wwwroot\pages\importFromFile.js.map" />
     <None Include="wwwroot\pages\importFromFile.ts" />
     <None Include="wwwroot\pages\importFromKeys.html" />
-    <None Include="wwwroot\pages\importFromKeys.js" />
-    <None Include="wwwroot\pages\importFromKeys.js.map" />
     <None Include="wwwroot\pages\importFromKeys.ts" />
     <None Include="wwwroot\pages\importFromMnemonic.html" />
-    <None Include="wwwroot\pages\importFromMnemonic.js" />
-    <None Include="wwwroot\pages\importFromMnemonic.js.map" />
     <None Include="wwwroot\pages\importFromMnemonic.ts" />
     <None Include="wwwroot\pages\importFromQr.html" />
-    <None Include="wwwroot\pages\importFromQr.js" />
-    <None Include="wwwroot\pages\importFromQr.js.map" />
     <None Include="wwwroot\pages\importFromQr.ts" />
     <None Include="wwwroot\pages\index.html" />
-    <None Include="wwwroot\pages\index.js" />
-    <None Include="wwwroot\pages\index.js.map" />
     <None Include="wwwroot\pages\index.ts" />
     <None Include="wwwroot\pages\mining.html" />
-    <None Include="wwwroot\pages\mining.js" />
-    <None Include="wwwroot\pages\mining.js.map" />
     <None Include="wwwroot\pages\mining.ts" />
     <None Include="wwwroot\pages\network.html" />
-    <None Include="wwwroot\pages\network.js" />
-    <None Include="wwwroot\pages\network.js.map" />
     <None Include="wwwroot\pages\network.ts" />
     <None Include="wwwroot\pages\receive.html" />
-    <None Include="wwwroot\pages\receive.js" />
-    <None Include="wwwroot\pages\receive.js.map" />
     <None Include="wwwroot\pages\receive.ts" />
     <None Include="wwwroot\pages\send.html" />
-    <None Include="wwwroot\pages\send.js" />
-    <None Include="wwwroot\pages\send.js.map" />
     <None Include="wwwroot\pages\send.ts" />
     <None Include="wwwroot\pages\settings.html" />
-    <None Include="wwwroot\pages\settings.js" />
-    <None Include="wwwroot\pages\settings.js.map" />
     <None Include="wwwroot\pages\settings.ts" />
     <None Include="wwwroot\pages\support.html" />
-    <None Include="wwwroot\pages\support.js" />
-    <None Include="wwwroot\pages\support.js.map" />
     <None Include="wwwroot\pages\support.ts" />
     <None Include="wwwroot\pages\termsOfUse.html" />
-    <None Include="wwwroot\pages\termsOfUse.js" />
-    <None Include="wwwroot\pages\termsOfUse.js.map" />
     <None Include="wwwroot\pages\termsOfUse.ts" />
-    <None Include="wwwroot\providers\BlockchainExplorerProvider.js" />
-    <None Include="wwwroot\providers\BlockchainExplorerProvider.js.map" />
     <None Include="wwwroot\providers\BlockchainExplorerProvider.ts" />
-    <None Include="wwwroot\service-worker-raw.js" />
-    <None Include="wwwroot\service-worker-raw.js.map" />
     <None Include="wwwroot\service-worker-raw.ts" />
     <None Include="wwwroot\service-worker.js" />
-    <None Include="wwwroot\utils\Url.js" />
-    <None Include="wwwroot\utils\Url.js.map" />
     <None Include="wwwroot\utils\Url.ts" />
-    <None Include="wwwroot\workers\TransferProcessing.js" />
-    <None Include="wwwroot\workers\TransferProcessing.js.map" />
     <None Include="wwwroot\workers\TransferProcessing.ts" />
-    <None Include="wwwroot\workers\TransferProcessingEntrypoint.js" />
-    <None Include="wwwroot\workers\TransferProcessingEntrypoint.js.map" />
     <None Include="wwwroot\workers\TransferProcessingEntrypoint.ts" />
   </ItemGroup>
 

@@ -3,8 +3,8 @@ type vi = {
     k_image: string,
     key_offsets: number[],
     mixin: number
-    output_number: number,
-    output_hash: string,
+    outnumber: number,
+    outhash: string,
     type: string
 }
 

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -79,7 +79,7 @@ body.native .hideOnNonNative{
 	height:34px;line-height:34px;
 	position: fixed;
 	top:0;
-	background: #36393f;
+	background: #00853D;
 	color:white;
 	font-size:16px;
 	font-weight: bold;
@@ -120,7 +120,7 @@ body.menuHidden #menu {
 }
 
 #menu{
-	background: #36393f;
+	background: #00853D;
 	color: white;
 	padding:10px 15px;
 }
@@ -846,10 +846,10 @@ body{
 .btn.basic:hover{background:none !important;color:#e0e1e2;border:2px solid #e0e1e2;}
 .btn:hover{background-color: #cacbcd;color: rgba(0,0,0,.8);}
 
-.btn.primary{color: #fff;background-color: #2185d0;}
-.btn.primary.basic{color: #2185d0;border-color: #2185d0;}
-.btn.primary:hover {background-color: #1678c2;}
-.btn.primary.basic:hover{color: #1678c2;border-color: #1678c2;}
+.btn.primary{color: #fff;background-color: #40C18E;}
+.btn.primary.basic{color: #40C18E;border-color: #40C18E;}
+.btn.primary:hover {background-color: #00853D;}
+.btn.primary.basic:hover{color: #00853D;border-color: #00853D;}
 
 .btn.teal{background-color: #00b5ad;color: #fff;}
 .btn.teal:hover{background-color: #009c95;color: #fff;}
@@ -966,7 +966,7 @@ body{
 	border-radius: 500rem;
 }
 .field.checkbox input:checked~label:before{
-	background-color: #2185d0;
+	background-color: #40C18E;
 }
 .field.checkbox label:after{
 	background: #fff -webkit-gradient(linear,left top,left bottom,from(transparent),to(rgba(0,0,0,.05)));

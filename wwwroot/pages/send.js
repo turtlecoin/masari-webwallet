@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018, Gnock
  * Copyright (c) 2018, The Masari Project
- * Copyright (c) 2018, The Plenteum Project
+ * Copyright (c) 2018, The TurtleCoin Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -67,7 +67,6 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
             this.destinationAddress = '';
             this.amountToSend = '10.5';
             this.destinationAddressValid = false;
-            this.openAliasValid = false;
             this.qrScanning = false;
             this.amountToSendValid = false;
             this.domainAliasAddress = null;
@@ -334,41 +333,13 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
             });
         };
         SendView.prototype.destinationAddressUserWatch = function () {
-            if (this.destinationAddressUser.indexOf('.') !== -1) {
-                var self_1 = this;
-                if (this.timeoutResolveAlias !== 0)
-                    clearTimeout(this.timeoutResolveAlias);
-                this.timeoutResolveAlias = setTimeout(function () {
-                    blockchainExplorer.resolveOpenAlias(self_1.destinationAddressUser).then(function (data) {
-                        try {
-                            // cnUtil.decode_address(data.address);
-                            self_1.txDestinationName = data.name;
-                            self_1.destinationAddress = data.address;
-                            self_1.domainAliasAddress = data.address;
-                            self_1.destinationAddressValid = true;
-                            self_1.openAliasValid = true;
-                        }
-                        catch (e) {
-                            self_1.destinationAddressValid = false;
-                            self_1.openAliasValid = false;
-                        }
-                        self_1.timeoutResolveAlias = 0;
-                    }).catch(function () {
-                        self_1.openAliasValid = false;
-                        self_1.timeoutResolveAlias = 0;
-                    });
-                }, 400);
+            try {
+                cnUtil.decode_address(this.destinationAddressUser);
+                this.destinationAddressValid = true;
+                this.destinationAddress = this.destinationAddressUser;
             }
-            else {
-                this.openAliasValid = true;
-                try {
-                    cnUtil.decode_address(this.destinationAddressUser);
-                    this.destinationAddressValid = true;
-                    this.destinationAddress = this.destinationAddressUser;
-                }
-                catch (e) {
-                    this.destinationAddressValid = false;
-                }
+            catch (e) {
+                this.destinationAddressValid = false;
             }
         };
         SendView.prototype.amountToSendWatch = function () {
@@ -422,9 +393,6 @@ define(["require", "exports", "../lib/numbersLab/DestructableView", "../lib/numb
         __decorate([
             VueAnnotate_1.VueVar(null)
         ], SendView.prototype, "txDescription", void 0);
-        __decorate([
-            VueAnnotate_1.VueVar(true)
-        ], SendView.prototype, "openAliasValid", void 0);
         __decorate([
             VueAnnotate_1.VueVar(false)
         ], SendView.prototype, "qrScanning", void 0);

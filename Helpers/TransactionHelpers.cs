@@ -12,7 +12,7 @@ namespace WebWallet.Helpers
         public static CachedTx MapTx(TxResp tx)
         {
             CachedTx lightTx = new CachedTx();
-            lightTx.height = tx.blockIndex;
+            lightTx.height = tx.blockIndex + 1;
             if (tx.extra != null)
                 lightTx.publicKey = tx.extra.publicKey;
             lightTx.hash = tx.hash;
@@ -22,14 +22,14 @@ namespace WebWallet.Helpers
             lightTx.unlock_time = tx.unlockTime;
             //lightTx.global_index_start = tx.blockIndex; - handled in the cache calling process
             //map signatures
-            lightTx.signatures = new List<CachedSignature>();
-            if (tx.signatures != null)
-            {
-                foreach (var sig in tx.signatures)
-                {
-                    lightTx.signatures.Add(new CachedSignature() { first = sig.first, second = sig.second });
-                }
-            }
+            //lightTx.signatures = new List<CachedSignature>();
+            //if (tx.signatures != null)
+            //{
+            //    foreach (var sig in tx.signatures)
+            //    {
+            //        lightTx.signatures.Add(new CachedSignature() { first = sig.first, second = sig.second });
+            //    }
+            //}
             //map inputs
             lightTx.vin = new List<CachedInput>();
             if (tx.inputs != null)
@@ -49,8 +49,8 @@ namespace WebWallet.Helpers
                         }
                         if (inp.data.output != null)
                         {
-                            cachedInput.hash = inp.data.output.transactionHash;
-                            cachedInput.number = inp.data.output.number;        
+                            cachedInput.outhash = inp.data.output.transactionHash;
+                            cachedInput.outnumber = inp.data.output.number;        
                         }
                     }
                     cachedInput.type = inp.type;

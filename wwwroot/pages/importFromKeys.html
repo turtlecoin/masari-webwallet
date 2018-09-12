@@ -12,10 +12,13 @@
 			<div class="body" >
 				<div class="header-title" >{{ $t("importBasePage.parametersBlock.title") }}</div>
 				<div class="content" >
-					<div class="field toggle checkbox">
-						<input type="checkbox" name="public" v-model="viewOnly">
-						<label>{{ $t("importFromKeysPage.parametersBlock.viewOnlyWallet.label") }}</label>
-					</div>
+                    <div class="field toggle checkbox">
+                        <input type="checkbox" name="public" v-model="viewOnly">
+                        <label>{{ $t("importFromKeysPage.parametersBlock.viewOnlyWallet.label") }}</label>
+                        <div v-if="viewOnly" class="message error">
+                            {{ $t("importFromKeysPage.parametersBlock.viewOnlyWallet.info") }}
+                        </div>
+                    </div>
 
 					<div class="field">
 						<label>{{ $t("importBasePage.parametersBlock.password.label") }}</label>
