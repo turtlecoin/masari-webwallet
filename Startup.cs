@@ -23,14 +23,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebWallet.Helpers;
 using Microsoft.AspNetCore.ResponseCompression;
+using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace WebWallet
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(ILogger<Startup> _logger, ILoggerFactory _logFactory, IConfiguration configuration)
         {
             Configuration = configuration;
+            StaticLogger.LoggerFactory = _logFactory;
+            StaticLogger.LoggerFactory.AddSerilog();
         }
 
         public IConfiguration Configuration { get; }
@@ -38,13 +42,25 @@ namespace WebWallet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add logging
+            services.AddSingleton(new LoggerFactory().AddSerilog());
+            services.AddLogging();
+
+            //Configure the Serilog Logger
+            Log.Logger = new LoggerConfiguration()
+               .MinimumLevel.Debug()
+               .WriteTo.File(string.Concat(AppContext.BaseDirectory, "webwallet.log"), rollingInterval: RollingInterval.Day)
+               .Enrich.FromLogContext()
+               .CreateLogger();
+
+
             //add Hangfire
             services.AddHangfire(config => {
 
                 config.UseMemoryStorage();
                 config.UseConsole();
             });
-
+            
             //add MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<GzipCompressionProviderOptions>(options =>

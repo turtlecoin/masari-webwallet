@@ -3,6 +3,7 @@ using Hangfire.Console;
 using Hangfire.Server;
 using LiteDB;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,20 @@ namespace WebWallet.Helpers
 {
     public static class BlockchainCache
     {
+
+        private static ILogger logger = StaticLogger.CreateLogger("BlockchainChache");
+
+        private static void LogException(Exception ex)
+        {
+            logger.Log(LogLevel.Error, ex.Message);
+            logger.Log(LogLevel.Error, ex.StackTrace);
+            if (ex.InnerException != null)
+            {
+                logger.Log(LogLevel.Error, string.Concat("Inner: ", ex.InnerException.Message));
+                logger.Log(LogLevel.Error, ex.InnerException.StackTrace);
+            }
+        }
+
         [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Delete)]
         [DisableConcurrentExecution(30)]
         public static void BuildCache(PerformContext context)
@@ -34,6 +49,7 @@ namespace WebWallet.Helpers
                 }
                 var startHeight = 1;
                 var endHeight = Convert.ToInt32(Math.Ceiling((double)(currentHeight / 10000) * 10000)) + 10000;
+                logger.Log(LogLevel.Information, $"Processing transactions from blocks {startHeight} to {endHeight}");
                 //now, splt the current height into blocks of 10000
                 for (int i = startHeight; i <= endHeight; i += 10000)
                 {
@@ -59,7 +75,10 @@ namespace WebWallet.Helpers
                             {
                                 start = lastTx.height;
                                 if (start == end)
+                                {
+                                    logger.Log(LogLevel.Information, $"Already cached transactions from blocks {startHeight} to {endHeight}");
                                     continue; //move to the next file... 
+                                }
                             }
                             else
                             {
@@ -68,7 +87,7 @@ namespace WebWallet.Helpers
                         }
                         catch (Exception ex)
                         {
-                            //todo: add logging
+                            LogException(ex);
                         }
                         var counter = 1;
                         var gCounter = start;
@@ -98,6 +117,7 @@ namespace WebWallet.Helpers
 
                                     if (counter == 50 || gCounter == currentHeight)
                                     {
+                                        logger.Log(LogLevel.Information, $"Caching transactions at height {gCounter}");
                                         var tx_args = new Dictionary<string, object>();
                                         tx_args.Add("transactionHashes", txHashes.ToArray());
                                         var txs = RpcHelper.Request<TxDetailResp>("get_transaction_details_by_hashes", tx_args);
@@ -114,7 +134,13 @@ namespace WebWallet.Helpers
                                         if (transactionsToInsert.Any())
                                         {
                                             transactions.InsertBulk(transactionsToInsert);
-                                            var heights = transactionsToInsert.Select(x => x.height).Distinct().OrderBy(x => x).ToList();
+                                            logger.Log(LogLevel.Information, $"Added {transactionsToInsert.Count} transactions to cache.");
+                                            var distinctTxCount = transactionsToInsert.Select(x => x.height).Distinct().Count();
+                                            if (distinctTxCount != 50)
+                                            {
+                                                logger.Log(LogLevel.Warning, $"Potentially missing transactions at height {gCounter}, expected min 50, found {distinctTxCount}");
+                                            }
+
                                         }
                                         counter = 0;
                                         txHashes.Clear();
@@ -132,7 +158,7 @@ namespace WebWallet.Helpers
             }
             catch (Exception ex)
             {
-                //todo: add logging
+                LogException(ex);
             }
             finally
             {
