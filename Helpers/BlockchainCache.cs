@@ -4,6 +4,7 @@ using Hangfire.Server;
 using LiteDB;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace WebWallet.Helpers
         [DisableConcurrentExecution(30)]
         public static void BuildCache(PerformContext context)
         {
+            var hashTracker = "";
             try
             {
                 //first, we need to know the current BC Height
@@ -114,12 +116,13 @@ namespace WebWallet.Helpers
                                     //if this fails we want it to exit, wait 30 seconds and startup again
                                     txHashes.AddRange(RpcHelper.RequestJson<BlockJsonResp>("f_block_json", hash_args).result.block.transactions.Select(x => x.hash).ToList<string>());
                                     //next, get the block itself and extract all the tx hashes....
-
-                                    if (counter == 50 || gCounter == currentHeight)
+                                    //TEMP: change back to 50
+                                    if (counter == 10 || gCounter == currentHeight)
                                     {
                                         logger.Log(LogLevel.Information, $"Caching transactions at height {gCounter}");
                                         var tx_args = new Dictionary<string, object>();
                                         tx_args.Add("transactionHashes", txHashes.ToArray());
+                                        hashTracker = JsonConvert.SerializeObject(tx_args);
                                         var txs = RpcHelper.Request<TxDetailResp>("get_transaction_details_by_hashes", tx_args);
                                         var transactionsToInsert = new List<CachedTx>();
                                         foreach (var tx in txs.transactions)
@@ -136,7 +139,8 @@ namespace WebWallet.Helpers
                                             transactions.InsertBulk(transactionsToInsert);
                                             logger.Log(LogLevel.Information, $"Added {transactionsToInsert.Count} transactions to cache.");
                                             var distinctTxCount = transactionsToInsert.Select(x => x.height).Distinct().Count();
-                                            if (distinctTxCount != 50)
+                                            //TEMP: change back to 50
+                                            if (distinctTxCount != 10)
                                             {
                                                 logger.Log(LogLevel.Warning, $"Potentially missing transactions at height {gCounter}, expected min 50, found {distinctTxCount}");
                                             }
@@ -159,6 +163,7 @@ namespace WebWallet.Helpers
             catch (Exception ex)
             {
                 LogException(ex);
+                logger.LogError("Hashes on fail: \n" + hashTracker);
             }
             finally
             {

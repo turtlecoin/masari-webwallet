@@ -56,7 +56,6 @@ namespace WebWallet
 
             //add Hangfire
             services.AddHangfire(config => {
-
                 config.UseMemoryStorage();
                 config.UseConsole();
             });
