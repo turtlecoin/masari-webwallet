@@ -1,3 +1,5 @@
+# NOTE: THIS PROJECT IS A WORK UNDER CONSTRUCTION - IT IS NOT FULLY FUNCTIONAL - DO NOT EXPECT EVERYTHING OR ANYTHING TO WORK STRAIGHT OUT OF THE BOX
+
 # TurtleCoin fork of the Masari Web Wallet - Fully client-side 
 This web wallet is doing everything client-side to give the best privacy to users.
 The server is currently only used to optimize the communication with the daemon and compress the blockchain.  
