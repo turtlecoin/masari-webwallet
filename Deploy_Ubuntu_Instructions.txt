@@ -93,6 +93,14 @@ Save the file
 
 Step 7: 
 
+Start your TurtleCoind node. The TurtleCoin daemon must be running with the following cli arguments
+
+	'./TurtleCoind --enable-blockexplorer --enable-cors "*" --rpc-bind-ip 0.0.0.0'
+
+ensure your node is fully sync'd with the TurtleCoin network before you proceed to the next step.
+
+Step 8:
+
 run: 
 
 	sudo nginx -t
