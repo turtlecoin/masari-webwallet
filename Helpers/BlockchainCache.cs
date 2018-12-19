@@ -35,75 +35,14 @@ namespace WebWallet.Helpers
         [DisableConcurrentExecution(30)]
         public static void BuildCache(PerformContext context)
         {
-
+            int batchSize = 100;
             try
             {
-                //first, we need to try again to fetch any failed or missing Tx's... 
-                using (var db = new LiteDatabase(string.Concat(AppContext.BaseDirectory, @"App_Data/", "failedHashes.db")))
-                {
-                    var failedTransactions = db.GetCollection<FailedHash>("failed_txs");
-                    failedTransactions.EnsureIndex(x => x.height);
-                    failedTransactions.EnsureIndex(x => x.hash);
-                    var allFails = failedTransactions.FindAll().ToList();
-                    foreach (var failedHash in allFails)
-                    {
-                        using (var txDb = new LiteDatabase(failedHash.DbFile))
-                        {
-                            var transactions = db.GetCollection<CachedTx>("cached_txs");
-                            var date = DateTime.Now;
-                            // Index document using height's, hash and Id
-                            transactions.EnsureIndex(x => x.height);
-                            transactions.EnsureIndex(x => x.Id);
-                            transactions.EnsureIndex(x => x.hash);
-                            //try fetch the transaction again... 
-                            var tx_args = new Dictionary<string, object>();
-                            tx_args.Add("transactionHashes", new string[] { failedHash.hash });
-                            try
-                            {
-                                var txs = RpcHelper.Request<TxDetailResp>("get_transaction_details_by_hashes", tx_args);
-                                var transactionsToInsert = new List<CachedTx>();
-                                foreach (var tx in txs.transactions)
-                                {
-                                    var cachedTx = TransactionHelpers.MapTx(tx);
-                                    //persist tx's to cache
-                                    if (cachedTx != null && !transactions.Find(x => x.hash == cachedTx.hash).Any())
-                                    {
-                                        transactionsToInsert.Add(cachedTx);
-                                    }
-                                }
-                                if (transactionsToInsert.Any())
-                                {
-                                    transactions.InsertBulk(transactionsToInsert);
-                                    logger.Log(LogLevel.Information, $"Added {transactionsToInsert.Count} transactions to cache.");
-                                    //remove from failedTx DB
-                                    foreach (var tx in transactionsToInsert)
-                                    {
-                                        var failedTx = failedTransactions.FindOne(x => x.hash == tx.hash);
-                                        if (failedTx != null)
-                                        {
-                                            failedTransactions.Delete(failedTx.Id);
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                failedHash.FetchAttempts++;
-                                logger.Log(LogLevel.Information, $"Failed to add single transaction {failedHash.hash} on attempt number {failedHash.FetchAttempts}.");
-                                LogException(ex);
-                                //update the failed Tx and restore it in DB to try again
-                                failedTransactions.Update(failedHash);
-                            }
-                        }
-                    }
-                }
-
-                //now, we're processing the pending transactions, we need to know the current BC Height
                 //get bc height from RPC
                 var currentHeight = 0;
                 try
                 {
-                    currentHeight = RpcHelper.Request<GetHeightResp>("getheight").Height - 1;
+                    currentHeight = RpcHelper.Request<GetHeightResp>("getheight").Height;
                 }
                 catch
                 {
@@ -136,7 +75,7 @@ namespace WebWallet.Helpers
                             if (lastTx != null)
                             {
                                 start = lastTx.height;
-                                if (start == end)
+                                if (start == end - 1)
                                 {
                                     logger.Log(LogLevel.Information, $"Already cached transactions from blocks {startHeight} to {endHeight}");
                                     continue; //move to the next file... 
@@ -151,111 +90,53 @@ namespace WebWallet.Helpers
                         {
                             LogException(ex);
                         }
-                        var counter = 1;
-                        var gCounter = start;
-
-                        var txHashes = new List<string>();
-
+                        //TODO: This is Currently re-importing the last 1000 blocks in every batch... need to fix that and add in a checking mechanism to 
+                        //get it re-checking cached files... 
                         if (currentHeight > start)
                         {
+                            var counter = start;
                             if (end > currentHeight) end = currentHeight;
-                            for (var j = start; j <= end; j++)
+                            try
                             {
-                                var height_args = new int[] { j };
-                                var blockHash = "";
-                                try
+                                var startBlock = (start / batchSize) * batchSize; //get the first "batch of 1000 to start with
+                                for (var y = startBlock; y <= end; y+= batchSize)
                                 {
-                                    blockHash = RpcHelper.RequestJson<HashResp>("on_getblockhash", height_args).result;
-                                }
-                                catch { }
-                                if (!string.IsNullOrEmpty(blockHash))
-                                {
-                                    //then, get the blockHash for the height we're currently processing...
-                                    var hash_args = new Dictionary<string, object>();
-                                    hash_args.Add("hash", blockHash);
-                                    //if this fails we want it to exit, wait 30 seconds and startup again
-                                    txHashes.AddRange(RpcHelper.RequestJson<BlockJsonResp>("f_block_json", hash_args).result.block.transactions.Select(x => x.hash).ToList<string>());
-                                    //next, get the block itself and extract all the tx hashes....
-                                    if (counter == 50 || gCounter == currentHeight)
+                                    var endBlock = end < y + batchSize ? end : y + batchSize;
+                                    List<int> blockHeights = new List<int>();
+                                    for (var x = y; x < endBlock; x++)
                                     {
-                                        logger.Log(LogLevel.Information, $"Caching transactions at height {gCounter}");
-                                        var tx_args = new Dictionary<string, object>();
-                                        tx_args.Add("transactionHashes", txHashes.ToArray());
-
-                                        //ok, so what seems to be happening here is that the query to get multiple block hashes is timing out.
-                                        //Two things have been changed
-                                        //RPC request timeout has been increased from 60 to 320ms
-                                        //secondly, if we get an error here, we revert to trying to fetch this batche of Tx's individually
-                                        try
+                                        blockHeights.Add(x);
+                                    }
+                                    if (blockHeights.Any())
+                                    {
+                                        //fetch the transactions
+                                        var args = new Dictionary<string, object>();
+                                        args.Add("blockHeights", blockHeights);
+                                        var blocks = RpcHelper.Request<BlockResp>("get_blocks_details_by_heights", args).blocks;
+                                        List<CachedTx> transactionsToInsert = new List<CachedTx>();
+                                        foreach (var block in blocks)
                                         {
-                                            var txs = RpcHelper.Request<TxDetailResp>("get_transaction_details_by_hashes", tx_args);
-                                            var transactionsToInsert = new List<CachedTx>();
-                                            foreach (var tx in txs.transactions)
+                                            foreach (var transaction in block.transactions)
                                             {
-                                                var cachedTx = TransactionHelpers.MapTx(tx);
+                                                var cachedTx = TransactionHelpers.MapTx(transaction);
                                                 //persist tx's to cache
                                                 if (cachedTx != null && !transactions.Find(x => x.hash == cachedTx.hash).Any())
                                                 {
                                                     transactionsToInsert.Add(cachedTx);
                                                 }
                                             }
-                                            if (transactionsToInsert.Any())
-                                            {
-                                                transactions.InsertBulk(transactionsToInsert);
-                                                logger.Log(LogLevel.Information, $"Added {transactionsToInsert.Count} transactions to cache.");
-                                                var distinctTxCount = transactionsToInsert.Select(x => x.height).Distinct().Count();
-                                                if (distinctTxCount != 50 && gCounter != currentHeight)
-                                                {
-                                                    logger.Log(LogLevel.Warning, $"Potentially missing transactions at height {gCounter}, expected min 50, found {distinctTxCount}");
-                                                    // so what do we do here, go back and try re-add the individual Tx's ?
-                                                    //fetch them all individually and try insert one by one?
-                                                }
-                                                else
-                                                {
-                                                    //we've added the 50 hashes, so now clear the Tx Cache
-                                                    txHashes.Clear(); // clear the current set of hashes
-                                                }
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            //so the fetching of TX's has failed, we need to loop the individual hashes and get them one by one to insert
-                                            logger.Log(LogLevel.Warning, $"Failed to fetch transactions at {gCounter}, reverting to individual hashes");
-                                            foreach (var hash in txHashes)
-                                            {
-                                                var cachedTx = AddSingleTransaction(hash);
-                                                if (cachedTx != null)
-                                                {
-                                                    if (!transactions.Find(x => x.hash == cachedTx.hash).Any())
-                                                        transactions.Insert(cachedTx);
-                                                }
-                                                else
-                                                {
-                                                    logger.LogError($"failed to fetch single transaction: {hash}");
-                                                    //log the failed hash and come back to try add it later on.
-                                                    var failedHash = new FailedHash()
-                                                    {
-                                                        DbFile = string.Concat(AppContext.BaseDirectory, @"App_Data/", "transactions_", start, "-", end, ".db"),
-                                                        hash = hash,
-                                                        height = gCounter,
-                                                        FetchAttempts = 0
-                                                    };
-                                                    using (var failedHashDb = new LiteDatabase(string.Concat(AppContext.BaseDirectory, @"App_Data/", "failedHashes.db"))) {
-                                                        var failedTransactions = db.GetCollection<FailedHash>("failed_txs");
-                                                        failedTransactions.EnsureIndex(x => x.height);
-                                                        failedTransactions.EnsureIndex(x => x.hash);
-                                                        failedTransactions.Insert(failedHash);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        counter = 0;
-                                        txHashes.Clear();
-                                    }
-                                    gCounter++;
-                                    counter++;
-                                }
 
+                                        }
+                                        if (transactionsToInsert.Any())
+                                        {
+                                            transactions.InsertBulk(transactionsToInsert);
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                LogException(ex);
                             }
 
                         }
@@ -269,6 +150,7 @@ namespace WebWallet.Helpers
             }
             finally
             {
+                logger.Log(LogLevel.Information, $"Job Completed, rescheduling...");
                 //finally, schedule the next check in 30 seconds time
                 BackgroundJob.Schedule(() => BlockchainCache.BuildCache(null), TimeSpan.FromSeconds(30));
             }

@@ -40,7 +40,7 @@ namespace WebWallet.Helpers
                     }
                     lightTx.vin.Add(cachedInput);
                 }
-                
+
             }
             //map outputs
             lightTx.vout = new List<CachedOutput>();
@@ -62,6 +62,34 @@ namespace WebWallet.Helpers
                         }
                     }
                     lightTx.vout.Add(cachedOutput);
+                }
+            }
+            return lightTx;
+        }
+
+        public static List<LightTx> MapTxs(List<CachedTx> txs) {
+            List<LightTx> outs = new List<LightTx>();
+            foreach (var tx in txs) {
+                outs.Add(MapTx(tx));
+            }
+            return outs;
+        }
+
+        public static LightTx MapTx(CachedTx tx)
+        {
+            LightTx lightTx = new LightTx();
+            lightTx.publicKey = tx.publicKey;
+            lightTx.hash = tx.hash;
+            lightTx.height = tx.height;
+            //map outputs
+            lightTx.vout = new List<LightOutput>();
+            if (tx.vout != null)
+            {
+                foreach (var outp in tx.vout)
+                {
+                    var lightOutput = new LightOutput();
+                    lightOutput.key = outp.key;
+                    lightTx.vout.Add(lightOutput);
                 }
             }
             return lightTx;

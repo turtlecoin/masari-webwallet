@@ -181,4 +181,10 @@
     <None Include="wwwroot\workers\TransferProcessingEntrypoint.ts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

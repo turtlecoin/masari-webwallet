@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using WebWallet.Helpers;
 using WebWallet.Models;
 
-namespace WebWallet.Controllers
+namespace plenteum_webwallet.Controllers
 {
     [Route("api/[controller]")]
     public class SendRawTxController : Controller

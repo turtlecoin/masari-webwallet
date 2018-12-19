@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2018, The TurtleCoin Project
+ * Copyright (c) 2018, The Plenteum Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -53,13 +53,13 @@ namespace WebWallet
                .Enrich.FromLogContext()
                .CreateLogger();
 
-
             //add Hangfire
             services.AddHangfire(config => {
+
                 config.UseMemoryStorage();
                 config.UseConsole();
             });
-            
+
             //add MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<GzipCompressionProviderOptions>(options =>
@@ -82,6 +82,7 @@ namespace WebWallet
             //add settings provider
             serviceProvider.ConfigureSettings(Configuration);
 
+
             app.UseHangfireServer(new BackgroundJobServerOptions() { ServerName = "web-wallet-api", WorkerCount = 1 });
 
 #if DEBUG
@@ -96,6 +97,7 @@ namespace WebWallet
                 app.UseHsts();
             }
             app.UseResponseCompression();
+            //app.UseHttpsRedirection();
             app.UseFileServer();
             app.UseMvc(routes =>
             {
@@ -103,7 +105,7 @@ namespace WebWallet
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
-            
+
             //Queue up the caching job
             using (var jobServer = new BackgroundJobServer(new BackgroundJobServerOptions { ServerName = "BackgroundJobServer", WorkerCount = 1 }))
             {

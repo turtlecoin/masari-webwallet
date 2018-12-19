@@ -191,7 +191,7 @@ namespace WebWallet.Helpers
         protected override WebRequest GetWebRequest(Uri address)
         {
             HttpWebRequest request = base.GetWebRequest(address) as HttpWebRequest;
-            request.Timeout = 320000;
+            request.Timeout = 60000;
             return request;
         }
     }

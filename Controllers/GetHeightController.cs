@@ -16,13 +16,12 @@ namespace WebWallet.Controllers
     [ApiController]
     public class GetHeightController : ControllerBase
     {
-
         [HttpGet]
         public ContentResult Get()
         {
             try
             {
-                return Content((RpcHelper.Request<GetHeightResp>("getheight").Height - 1).ToString());
+                return Content((RpcHelper.Request<GetHeightResp>("getheight").Height -1).ToString());
             }
             catch (Exception ex)
             {

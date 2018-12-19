@@ -474,17 +474,15 @@ body.transparent #copyright{
 		width:100%;
 	}
 }
-.indexTab .mainBlock{
-	min-height:90vh;
-	position: relative;
-	/*background: url(../img/binary-background.jpg) #146DBD;*/
-	text-align: center;
-	background-image: -webkit-linear-gradient(rgba(62, 75, 92, 0.70), rgba(62, 75, 92, 0.70)), url(../img/landing/75-usersthink-stock-image.jpg);
-	background-image: -o-linear-gradient(rgba(62, 75, 92, 0.70), rgba(62, 75, 92, 0.70)), url(../img/landing/75-usersthink-stock-image.jpg);
-	background-image: linear-gradient(rgba(62, 75, 92, 0.70), rgba(62, 75, 92, 0.70)), url(../img/landing/75-usersthink-stock-image.jpg);
-	background-position: center center;
-	background-size: cover;
-	margin-bottom:160px;
+.indexTab .mainBlock {
+    min-height: 90vh;
+    position: relative;
+    text-align: center;
+    background-image: url(../img/landing/landing.png);
+    background-size: 50%;
+    background-position: center center;
+    background-size: cover;
+    margin-bottom: 160px;
 }
 body.native .indexTab .mainBlock {
 	height: 100vh;
@@ -850,6 +848,10 @@ body{
 .btn.primary.basic{color: #40C18E;border-color: #40C18E;}
 .btn.primary:hover {background-color: #00853D;}
 .btn.primary.basic:hover{color: #00853D;border-color: #00853D;}
+
+.btn.primary.invert{color: #00853D;background-color: #fff;}
+.btn.primary.invert:hover {background-color:#00853D; color:#fff;}
+
 
 .btn.teal{background-color: #00b5ad;color: #fff;}
 .btn.teal:hover{background-color: #009c95;color: #fff;}

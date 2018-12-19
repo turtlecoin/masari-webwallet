@@ -10,6 +10,11 @@ namespace WebWallet.Models
         public BlockJsonResult result { get; set; }
     }
 
+    public class BlockResp
+    {
+        public List<Block> blocks { get; set; }
+    }
+
     public class BlockJsonResult {
         public BlockJsonBlock block { get; set; }
     }

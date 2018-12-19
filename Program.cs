@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2018, The TurtleCoin Project
+ * Copyright (c) 2018, The Plenteum Project
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -28,11 +28,13 @@ namespace WebWallet
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
         #region Windows Hosting Under IIS
-            //comment this region out if using anything otehr than IIS
-                //.UseKestrel()
-                //.UseIISIntegration()
-                //.UseContentRoot(Directory.GetCurrentDirectory())
-        #endregion
+#if RELEASE
+                //comment this region out if using anything otehr than IIS
+                .UseKestrel()
+                .UseIISIntegration()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+#endif
+#endregion
                 .UseStartup<Startup>();
     }
 }

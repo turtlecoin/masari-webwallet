@@ -5,10 +5,10 @@ https://www.microsoft.com/net/download/linux-package-manager/ubuntu16-04/sdk-2.1
 
 Step 2: git clone your repo
 
-open Program.cs in the root of the cloned repo and remove the below lines:
+open Program.cs in the root of the cloned repo and remove or comment out the below lines:
 
         #region Windows Hosting Under IIS
-            //comment this region out if using anything otehr than IIS
+            //comment this region out if using anything other than IIS
                 .UseKestrel()
                 .UseIISIntegration()
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -68,7 +68,7 @@ then paste the following into the file:
 
 server {
     listen        80;
-    server_name   example.com *.example.com;
+    server_name   turtlestash.com *.turtlestash.com;
     location / {
         proxy_pass         http://localhost:5000;
         proxy_http_version 1.1;
