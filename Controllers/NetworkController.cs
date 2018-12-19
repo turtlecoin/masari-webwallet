@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebWallet.Helpers;
 using WebWallet.Models;
 
-namespace plenteum_webwallet.Controllers
+namespace WebWallet.Controllers
 {
     [Route("api/[controller]")]
     public class NetworkController : Controller
