@@ -1,0 +1,480 @@
+{
+  "website":{
+	"title":"Официальный онлайн кошелёк TurtleCoin'а",
+	"description":"Официальный онлайн кошелёк TurtleCoin'а - анонимный, защищённый, а так-же полностью находящийся на стороне браузера для оптимальной безопасности"
+  },
+  "messages": {
+	"menu": {
+	  "home": "Домой",
+	  "account": "Аккаунт",
+	  "send": "Отправить",
+	  "receive": "Принять",
+	  "export": "Экспортировать",
+	  "donate": "Поддержать проект",
+	  "settings": "Настройки",
+	  "disconnect": "Отключиться",
+	  "network": "Статистика сети",
+	  "mining": "Майнинг"
+	},
+	"global": {
+	  "loading": "Загрузка",
+	  "disableSecurity":"Отключить этот параметр безопасности, я понимаю риски",
+	  "passwordInvalidRequirements":"Пароль должен иметь хотя бы 8 знаков - 1 большая буква, 1 маленькая буква, одна цифра, и один специальный символ",
+	  "passwordConfirmationNotMatching":"Пароль не совпадает с первым паролем введенным вами ",
+	  "download":"Загрузить",
+	  "newVersionModal":{
+		"title":"Доступна новая версия",
+		"content":"Хотите ли вы перезагрузить страницу для загрузки новой версии?",
+		"confirmText":"Да",
+		"cancelText":"Назад"
+	  },
+	  "openWalletModal":{
+		"title":"Пароль кошелька",
+		"confirmText":"Открыть",
+		"cancelText":"Отменить"
+	  },
+	  "invalidPasswordModal":{
+		"title":"Упс...",
+		"content":"Ваш пароль не верен",
+		"confirmText":"ОК"
+	  },
+	  "invalidMnemonicModal":{
+		"title":"Упс...",
+		"content":"Мнеморическая фраза не верна",
+		"confirmText":"ОК"
+	  },
+	  "passwordNotComplexEnoughModal":{
+		"title":"Пароль не достаточно сложный",
+		"confirmText":"ОК"
+	  },
+	  "permissionRequiredForCameraModal":{
+		"title":"Упс...",
+		"content":"Доступ к вашей камере нужен, чтобы просканировать QR код",
+		"confirmText":"ОК"
+	  }
+	},
+	"bottom": {
+	  "termsOfUse": "Условия использования",
+	  "support": "Поддержка",
+	  "donate": "Донат",
+	  "network": "Статистика сети",
+	  "miningPool": "Майнинг пул",
+	  "github": "Гитхаб"
+	},
+	"homepage": {
+	  "mainTitle": "Защищенный TurtleCoin кошелёк",
+	  "tagLine": "Самый простой способ использвать TurtleCoin - везде и в любое время",
+	  "actions": {
+		"loadWallet": "Загрузить мой кошелёк",
+		"importWallet": "Смпортировать кошелёк",
+		"create": "Создать",
+		"createWallet": "Создать кошелёк"
+	  },
+	  "notes": {
+		"secure": {
+		  "title": "Защищено",
+		  "description": "Нет серверов, всё полностью зашифровано!"
+		},
+		"fast": {
+		  "title": "Быстро",
+		  "description": "Отправляёте куда угодно, когда угодно!"
+		},
+		"technology": {
+		  "title": "Уникальная технология",
+		  "description": "Подключено напрямую к блокчейну TurtleCoin'а!"
+		},
+		"openSource": {
+		  "title": "Полный опен-сорс",
+		  "description": "Доступно на Гитхабе!"
+		}
+	  }
+	},
+	"accountPage": {
+	  "title": "Аккаунт",
+	  "subtitle": "Ваш аккаунт и история переводов",
+	  "synchronizingBlock": {
+		"text": "Синхронизируемся..."
+	  },
+	  "balanceBlock": {
+		  "title": "Ваш баланс",
+      "unlocked": "Разюлокировано",
+      "fusions":  "Фьюжн транзакции для разблокирования"
+	  },
+	  "historyBlock": {
+		"title": "История транзакций",
+		"pendingTxStatus": "Ожидаем",
+		"emptyWallet": "На данный момент у вас нет монет в этом кошельке.",
+		"waitSync": "Пожалуйста подождите обновления кошелька",
+		"beReallyPatient": "В первый раз настройка может занять какое-то время...",
+		"getTRTLAddress": "Принять TRTL"
+	  },
+	  "txDetails":{
+		"title":"Детали транзакции",
+		"txHash":"Хэш транзакции",
+		"feesOnTx":"Комиссия транзакции",
+		"blockHeight":"Высота блокчейна",
+		"paymentId":"ID плательщика"
+	  }
+	},
+	"changeWalletPasswordPage":{
+	  "title":"Изменить ваш пароль",
+	  "oldPassword":{
+		"label":"Старый пароль",
+		"invalid":"Пароль не действителен"
+	  },
+	  "newPassword":{
+		"label":"Выберите новый пароль для защиты ващего кошелька"
+	  },
+	  "newPasswordConfirm":{
+		"label":"Подтвердите новый пароль"
+	  },
+	  "confirm":"Изменить пароль",
+	  "modalSuccess":{
+		"title":"Пароль изменён!",
+		"confirmText":"ОК"
+	  }
+	},
+	"createWalletPage":{
+	  "generatingStep":{
+		"title":"Ваш кошелёк генерируется...",
+		"subtitle":"Почти готово",
+		"waitingMessage":"Генерируем ваш кошелёк..."
+	  },
+	  "finalizationStep":{
+		"title":"Это было просто! Ваш аккаунт готов!",
+		"subtitle":"Be ready to use TurtleCoin like you never have",
+		"passwordSelectionBlock":{
+		  "label":"Защитить ваш кошелёк"
+		},
+		"passwordConfirmBlock":{
+		  "label":"Подтвердить пароль"
+		},
+		"validPassword":"Использовать этот пароль",
+		"backupBlock":{
+		  "title":"Save your private credentials for recovery.",
+		  "option1":"Опция 1: ",
+		  "option2":"Опция 2: ",
+		  "titlePdf":"Сохранить копию в PDF формате",
+		  "titleManualWrite":"Записать мои приватные ключи",
+		  "privateKeys":"Приватный ключ",
+		  "mnemonicPhrase":"Мнеморическая фраза",
+		  "separatorManualMethodsSolution":" или ",
+		  "confirmManuallyWritten":"Я записал мою сид фразу",
+		  "warningMessage":"**Не потеряйте эту информацию!** В случае потери её невозможно будет восстановить.<br/>**Не распространяйте её!** Ваши деньги будут украдены если вы дадите эту фразу фишинговому сайту.<br/>**Сделайте бэкап!** Храните её как миллионы долларов она может стоить в будущем!<br/>",
+		  "finishButton":"Я понимаю. Продолжить."
+		}
+	  },
+	  "disclaimerBlock":{
+		"title":"Риски использования TurtleCoinWallet",
+		"content":"TurtleCoinWallet - веб интерфейс. Он помогает вам использовать TurtleCoin юез скачивания полной ноды. <br/>Мы рекомендуем чтобы вы относились к TurtleCoinWallet как к вашему реальному кошельку."
+	  }
+	},
+	"donatePage":{
+	  "title":"Помощь проекту",
+	  "subtitle":"Помощи в разработке и в оплате счетов",
+	  "webwalletBlock":{
+		"title":"Веб-кошелёк",
+		"content":"Этот веб-кошелёк был разработан Gnock'ом в свободное время.<br/>Если вы хотите помочь разработке, помочь в оплате серверов, а так же, если вам нравится это приложение, можете задонатить: <br/><br/>"
+	  },
+	  "masariFundBlock":{
+		"title":"TurtleCoin фонд разработки",
+		"content":"Чтобы помочь TurtleCoin, вы можете отправить пожертвование на следующий адрес"
+	  }
+	},
+	"supportPage":{
+	  "title":"Помощь",
+	  "subtitle":"Мы тут чтобы помочь!",
+	  "getInTouchBlock":{
+		"title":"Напишите нам!",
+		"content":"У вас есть идеи или отзывы, которые могут улучшить кошелёк? Напишите нам!",
+		"discord":"TurtleCoin Дискорд"
+	  }
+	},
+	"networkPage":{
+	  "title":"Статистика сети",
+	  "subtitle":"Детальная статистика сети TurtleCoin",
+	  "statsBlock":{
+		"hashrate":"Хэшрейт сети",
+		"height":"Высота блокчейна",
+		"difficulty":"Сложность сети",
+		"lastTimeBlock":"Последний блок найден",
+		"lastReward":"Последняя награда за блок"
+	  }
+	},
+	"sendPage":{
+	  "title":"Отправить TRTL",
+	  "sendBlock":{
+		"address":{
+		  "label":"Адрес прибытия",
+		  "invalid":"Адрес прибытия не верен",
+		  "fundsTo":"Монеты будут отправлены",
+		  "receiver":"Принимающий",
+		  "description":"Описание"
+		},
+		"amount":{
+		  "label":"Сколько отправить",
+		  "invalid":"Это количество не верно"
+		},
+		"paymentId":{
+		  "label":"Payment ID (опционально)",
+		  "invalid":"Payment ID не верен. Длина должна быть 16 или 64 символов"
+		},
+		"sendButton":"Отправить",
+		"cancelButton":"Отменить"
+	  },
+	  "qrCodeScanning":{
+		"explication":"Показать QR код"
+	  },
+	  "notEnoughMoneyModal":{
+		"title":"Упс...",
+		"content":"У вас не достаточно монет в кошельке для совершения этой танзакции",
+		"confirmText":"ОК"
+	  },
+	  "thankYouDonationModal":{
+		"title":"Спасибо за ваше пожертвование!",
+		"content":"Ваша помощь значит для нас очень много. <br/>Это пожертвование поможет сделать TurtleCoin лучше",
+		"confirmText":"ОК"
+	  },
+	  "transferSentModal":{
+		"title":"Отправлено успешно!",
+		"confirmText":"ОК"
+	  },
+	  "transferExceptionModal":{
+		"title":"Упс...",
+		"content":"Произошла ошибка. Пожалйста дайте знать об этой ошибке: {details}",
+		"confirmText":"ОК"
+	  },
+	  "invalidAmountModal":{
+		"title":"Упс...",
+		"content":"Неверное количество",
+		"confirmText":"ОК"
+	  },
+	  "creatingTransferModal":{
+		"title":"Создаём отправление ...",
+		"content":"Пожалуйста подождите..."
+	  },
+	  "finalizingTransferModal":{
+		"title":"Завершаем отправление ...",
+		"content":"Пожалуйста подождите..."
+	  },
+	  "confirmTransactionModal":{
+		"title":"Подтвердить отправление?",
+		"content":"Количество: {amount}<br/>Fees: {fees}<br/>Всего: {total}",
+		"confirmText":"Принять",
+		"cancelText":"Отменить"
+	  },
+	  "waitingNfcModal":{
+		"title":"Ждём Nfc",
+		"content":"Поднесите ближе к другому устройству"
+	  }
+	},
+	"receivePage":{
+	  "title":"Принять TRTL",
+	  "receiveBlock":{
+		"address":{
+		  "title":"Ваш адрес для принятия монет:",
+		  "label":"Передайте этот адрес чтобы принимать монеты"
+		},
+		"qrCode":{
+		  "title":"Или персонализируйте QR код:",
+		  "labelAmount":"Количество (опционально)",
+		  "labelRecipient":"Recipient name (опционально)",
+		  "labelDescription":"Transaction description (опционально)",
+		  "updateButton":"Обновить"
+		}
+	  },
+	  "qrBlock":{
+		"title":"Ваш кастомизированный QR код"
+	  },
+	  "waitingNfcToWriteModal":{
+		"title":"Ждём Nfc",
+		"titleSuccess":"Nfc Tag записан",
+		"content":"Поднесите NFC Tag ближе для записи"
+	  },
+	  "nfcErrorModal":{
+		"titleInsufficientCapacity":"Недостаточный размер Tag'а"
+	  }
+	},
+	"miningPage":{
+	  "title":"майнинг информация",
+	  "subtitle":"Поддержите сеть майнингом и будьте вознаграждены TRTL",
+    "contentBlock": {
+      "title": "Как начать майнить",
+      "intro": "Майнинг помогает децентрализировать сеть и помогает вам зарабатывать TurtleCoin. Для майнинга TurtleCoin'а вам не нужно специализированного оборудования.",
+      "linkText": "Нажмите здесь для загрузки майнера."
+    }
+	},
+	"settingsPage":{
+	  "title":"Настройки",
+	  "subtitle":"Изменчйте ваши параметры здесь",
+	  "versionBlock":{
+		"versionNumber":"Номер версии: ",
+		"versionCode":"Код версии: "
+	  },
+	  "settingsBlock":{
+		"speed":{
+		  "label":"Скорость обновления кошелька (займёт больше ресурсов)",
+		  "fastest":"Наибыстрейшая",
+		  "fast":"Быстрая",
+		  "medium":"Средняя",
+		  "slow":"Медленная"
+		},
+		"language":{
+		  "label":"Язык"
+		},
+		"readMinerTx":{
+		  "label":"Прочитать транзакции майнера (только для соло майнинга)"
+		}
+	  },
+	  "changePasswordButton":"Изменить мой пароль для кошелька",
+	  "deleteWalletButton":"Удалить мой кошелёк (локальная копия)",
+	  "walletSettings":{
+		"creationHeight":{
+		  "label":"Высота создания кошелька"
+		},
+		"currentScanningHeight": {
+		  "label": "Высота нынешнего сканирования"
+		},
+		"updateButton":"Обновить"
+	  },
+	  "deleteWalletModal":{
+		"title":"Удалить мой кошелёк (локальная копия)",
+		"content":"Вы уверены, что вы ОЧЕНЬ сильно хотите удалить свой кошелёк ?",
+		"confirmText":"Да, я уверен",
+		"cancelButtonText":"Отмена"
+	  }
+	},
+	"importBasePage":{
+	  "parametersBlock":{
+		"title":"Параметры",
+		"password":{
+		  "label":"Пароль для защиты вашего кошелька"
+		},
+		"passwordConfirm":{
+		  "label":"Подтвердить пароль",
+		  "invalid":"Пароль не совпадает с первым паролем"
+		},
+		"importHeight":{
+		  "label":"Высота для импортирования:"
+		}
+	  }
+	},
+	"importFromQrPage":{
+	  "title":"Импортировать кошелёк из QR кода",
+	  "subtitle":"Импортировать кошелёк из оффлайн бэкапа",
+	  "qrCodeBlock":{
+		"title":"QR код",
+		"startScanButton":"Начать сканирование",
+		"importButton":"Импортировать"
+	  },
+	  "qrScanningBlock":{
+		"title":"Покажите QR код"
+	  }
+	},
+	"exportPage":{
+	  "title":"Сохрание ваши данные",
+	  "publicAddressBlock":{
+		"title":"Ваш публичный адрес"
+	  },
+	  "pdfBlock":{
+		"title":"PDF бэкап",
+		"downloadButton":"Загрузить"
+	  },
+	  "warningBlock":{
+		"title":"Внимание",
+		"content":"Если вы хотите сохранить ваши приватные ключи или мнеморическую фразу, TRTLASE не храните их в виде чистого текста для вашей же безопасности.<br/>Файл, где ваши ключи зашифрованы и там есть бэкап ваших тразакций для более быстрой синхронизации в будущем это альтернативное решение."
+	  },
+	  "exportBlock":{
+		"title":"Экспортировать ваши данные в ЧИСТОМ виде",
+		"privateKeysButton":"Получить мои приватные ключи",
+		"mnemonicKeysButton":"Получить мою мнеморическую фразу",
+		"fileButton":"Экспортировать в файл"
+	  },
+	  "walletKeysModal":{
+		"title":"Приватные ключи",
+		"confirmText":"ОК",
+		"content":"Пожалуйста бережно храните эти ключи. <b>Имение этих ключей означает имение всех ассоциированых с ними монет</b> !<br/>Ключ для  трат: {privSpendKey}<br/>Приватный ключ для просмотра: {privViewKey}"
+	  },
+	  "mnemonicKeyModal":{
+		"title":"Мнеморическая фраза",
+		"confirmText":"ОК",
+		"content":"Пожалуйста бережно храните эту мнеморическую фразу. <b>Имение этой фразы означает имение всех ассоциированых с ними монет</b> ! Фраза:<br/>{mnemonic}"
+	  },
+	  "mnemonicLangSelectionModal":{
+		"title":"На каком языке вы хотите получить свою мнеморичеескую фразу?",
+		"confirmText":"Экспортировать"
+	  }
+	},
+	"importPage":{
+	  "title":"Создать кошелёк",
+	  "subtitle":"Из ранее созданных ключей, файла, или мнеморической фразы",
+	  "chooseMethod":"Выберите метод ввода:",
+	  "fromKeys":"Из ключей",
+	  "fromFile":"Из файла",
+	  "fromMnemonic":"Из мнеморической фразы",
+	  "fromQr":"Из QR кода"
+	},
+	"termsOfUsePage":{
+	  "title":"Правила использования",
+	  "subtitle":"Пожалуйста читайте их внимательно."
+	},
+	"importFromFilePage":{
+	  "title":"Импортировать кошелёк из бэкап файла",
+	  "subtitle":"Использовать ваш бэкап файл для создания кошелька",
+	  "walletBlock":{
+		"title":"Файл кошелька",
+		"label":"Выберите файл",
+		"importButton":"Импортировать"
+	  }
+	},
+	"importFromMnemonicPage":{
+	  "title":"Импортировать кошелёк из мнеморической фразы",
+	  "subtitle":"Использовать вашу мнеморическую фразу для создания кошелька",
+	  "mnemonicBlock":{
+		"title":"Мнеморическая фраза",
+		"mnemonic":{
+		  "label":"Мнеморическая фраза: 25 слов",
+		  "invalid":"Мнеморическая фраза не верна",
+		  "language":"Язык"
+		},
+		"importButton":"Импортировать"
+	  }
+	},
+	"importFromKeysPage":{
+	  "title":"Импортировать кошелёк из ключей",
+	  "subtitle":"Использовать ваши ключи для создания кошелька",
+	  "parametersBlock":{
+      "viewOnlyWallet": {
+        "label": "Хотите ли вы кошелёк только с возможность просмотра?",
+        "info": "Заметьте, что кошельки с только возможностью просмотра могут лишь отслеживать входящие транзакции, Так что ваш баланс может быть очеть сильно раздут!"
+      }
+	  },
+	  "keysBlock":{
+		"titleNotViewOnly":"Ключи кошелька",
+		"titleViewOnly":"Кошелёк только с возможностью просмотра",
+		"privateSpend":{
+		  "label":"Приватный ключ для отправлений"
+		},
+		"privateView":{
+		  "label":"Приватный ключ для просмотра",
+		  "optional":"(опционально)"
+		},
+		"publicKey":{
+		  "label":"Публичный ключ"
+		},
+		"importButton":"Импортировать"
+	  }
+	}
+  },
+  "number":{
+  },
+  "date":{
+	"short": {
+	  "year": "numeric", "month": "short", "day": "numeric"
+	},
+	"long": {
+	  "year": "numeric", "month": "short", "day": "numeric",
+	  "weekday": "short", "hour": "numeric", "minute": "numeric", "hour12": true
+	}
+  }
+}
